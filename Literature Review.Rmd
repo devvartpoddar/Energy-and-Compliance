@@ -1,0 +1,65 @@
+---
+title: "Energy and Compliance"
+author: "Emma Heffernan and Devvart Poddar"
+date: "21 October 2016"
+output: html_document
+bibliography: references.bib
+---
+
+# Introduction
+
+Rising electricity costs in developed nations has become the political topic du jour across OECD jurisdictions. The cost of electricity matters: the impact of rising electricity costs is felt most acutely by low-income individuals, who see a greater proportion of their pay checks directed towards their hydro bills. Given the economic difficulties caused by rising electricity prices, this is an ongoing topic of importance for academics and politicians alike.
+
+Much of the blame for rising electricity prices has been levied against government renewable energy policies [e.g. see @Ferguson2016, @Lynch2016,@Svaldi2016]. This perspective claims that the requirement that electricity generation is made up of more expensive renewable energy production will lead to higher costs. Indeed, as the U.S. Energy Information Administrative (EIA) claims that generation is responsible for 65% of average electricity prices, distribution accounts for 25% of average electricity prices, and transmission accounts for 9% of electricity prices @EIA2015, a rise in the cost of generating electricity may lead to increased prices.
+
+The question that is left unanswered here is whether different degrees of judicial compliance with political regulations leads to different cost outcomes. In part, this gap in the literature is because much research has been limited to qualitative studies that select a few extreme cases, [e.g see @Netherlands2013] and quantitative studies that ignore issues of compliance with certain policies in their quantitative analysis [e.g. see @Wang2016]. These research efforts are invaluable; they provide an understanding of how outliers have implemented renewable energy policies, and of general trends assuming monolithic compliance models. However, we propose that an explanation of the link between renewable policy and electricity pricing can go further through a textual of the results of these commission’s judicial decisions and then evaluating potential correlations between compliance and cost in the United States. The choice of case study is because the similarity of federal policy, coupled with a difference in intensity in state policies, and potential differences in compliance, allows for a unique opportunity for differences-in-differences comparisons.
+
+# Literature Review: Renewable Energy Policies and Electricity Prices
+
+Non-hydro renewable electricity production accounts for 2% of total electricity production in the United States; fossil fuels used for electricity generation account for 40% of all carbon dioxide emissions resulting from human activity in the United States [@EIA2015]. The overwhelming amount of carbon dioxide produced by electricity production has prompted action in multiple states to encourage the increase of renewable energy production feeding into the electricity grid [@Wang2016].
+
+Renewable energy promotion policies are separated in the literature into two broad policies realms: market-pull policies and technological-push policies. Market-pull policies aim at “increasing renewable energy use by creating demand for Renewable Energy Targets (RETs)” @EIA2015 (p. 16). These policies include carbon taxation strategies, technology and performance standards, and investment promotion. The second is technology-push policies, which include public R&D spending, tax credits, and support for education and training. This paper will not concern itself with evaluating which policy mechanisms are best for encouraging the incorporation of renewable energy generation into the electricity grid. The reason for this is two-fold: first, there is already a robust literature with persuasive arguments on either side of the debate , and second, the main conclusion of many of these papers is that any policy can be effective as long as the government is reliably committed to ensuring its success [(e.g. see @LangnissWiser2003; @Martinot2005)]. Hence, this paper will look at existing policies in the United States and will evaluate the impact of ensured compliance of these policies on the cost of electricity as opposed to engaging in the discussion of which policies are the most effective.
+
+As this paper is primarily concerned with the impact of the increased utilization of renewable energy in a distribution grid on electricity prices, this paper will focus specifically on market-pull policies that incentivize the generation of renewable energy. There are two types of policies that incentivize the use of renewable energy generation in the electricity grid. The first is a market-based construction of generation incentives, and the second is generation promotion policies. These policies are summarized in the following table.
+
+|Policy|Price-Driven|Quantity-Driven|
+|---|---|---|
+|Generation Incentives|Feed-in tariffs|Tendering systems for long term contracts Energy|
+| |Premium feed-in tariffs	 |Portfolio standards (quotas)| 
+|Generation Promotion|Green Tariffs| |
+
+## Feed-in Tariffs and Premium Feed-in Tariffs
+
+Feed-in Tariff (FIT) programs are a policy mechanism used to encourage the deployment of renewable electricity technologies @EIA2013. They guarantee that a customer that owns a FIT-eligible renewable electricity generation facility, such as a solar panel, receives a set price from their utility for the electricity generated and provided to the grid. As such, it is a performance-based incentive for the production of renewable energy, and can be compared to a tax credit in the way that it encourages the increased installation and use of renewable energy by consumers. Typically, FITs vary widely in execution, as policies specify the eligible technologies, the rate and contract terms, system size and sector restrictions, and program size limitations @EIA2013.. 
+
+Despite the wide international use of FITS, the utilization of feed-in tariffs have not been popular in the United States at the state level. Currently, there are five states that have mandated FITs by law or regulation, and a handful of states have voluntary FIT programs [@EIA2013]. Given the lack of variation at the state level for this policy in the United States, this policy will not be the main policy of investigation, though it will be controlled for in the final analysis.
+
+## Tendering systems for long term contracts
+
+In the United States, the use of tendering systems for long-term contracts is not an independent policy measure in and of itself. Rather, companies can choose to engage in long-term contracts in order to ensure that they meet the requirements set out by other policies [@Wang2016]. As such, though this can be seen as a company-level variable in terms of whether it can meet its required compliance objectives, this is only of interest to this paper if the courts do not act to enforce the law when companies fail to use this, or other measures, to ensure regulatory compliance.
+
+## Green Tariffs
+
+Green tariffs allow eligible customers to buy renewable energy from a renewable energy project, and allow corporations to buy large amount of renewable energy to support their project [@EIA2013]. This policy, however, can also be seen as an intermediary variable in this analysis: utilities that employ green tariffs with customers do so to ensure that they are meeting their renewable energy procurement goals outlined by other policies.
+
+## Energy Portfolio standards (quotas)
+
+In the United States, 29 states have implemented mandatory Renewable Portfolio Standards (RPS), and a further 8 states have adopted non-binding goals for renewable energy standards [@Wang2016]. These states place an obligation on electricity supply companies to produce a specific faction of their electricity from renewable sources. Though it has been argued that RPS policies increase the amount of renewable energy generation in a state @Carley2009 critics argue that RPS increases retail electricity prices because of the required extra investment or costs involved with a switch to using renewable energy @Lesser2013.
+
+Though RPS policies are the most popular means by which states have encouraged the integration of renewable energy generation into the generation grid, the design of these policies varies wildly by state. States differ on the timelines, the requirements for the amount of energy that must be procured from renewable energy sources, and the implemented “escape clauses”, whereby companies can request a delay in their renewable energy procurement targets if the cost of procuring it exceeds a certain threshold [@EIA2013]. Theoretically, the different requirements imposed by the different RPS policies will impact upon the actions of the companies, and will subsequently impact the price of electricity.
+
+Previous studies of RPS policy effects have focused on evaluating whether the implementation of policies will lead to forecasted changes in electricity costs either at the national level or the state level [e.g. see @PalmarBurtraw2005; @Kydes2007; @Wang2016]. Notably, Hongbo Wang (2016) uses a differences-in-differences model to compare the electricity prices of those states that have not implemented RPS to the electricity prices of those states that have implemented RPS, and found that implementation increases electricity prices when the RPS policy first becomes binding. However, he fails to consider whether the commissioner court systems enforce compliance to the RPS in the same way across the evaluated states. Potentially, differences in compliances will explain some of the variation in electricity price changes in states with similar policies. It is this oversight that our paper will address.
+
+This concern with regulatory administration of renewable energy policies necessitates constructing an appropriate definition, and way of measuring, “compliance.” For example, other studies might investigate how thoroughly a regulation has been enforced, counting the number of inspections and enforcement actions or the size of penalties imposed [@OECD2009]. It is this latter measure that this analysis will be concerned with: how often are cases of non-compliance brought before the courts, and what is the distributed policy. It remains an imperfect measure, but our hope is that this measure can be further refined and explored in future research. 
+
+# Data Sources and Methodologies
+This paper will use multiple data sources to conduct this analysis. 
+First, the data on residential electricity pricing (Cents per kwh), the dependent variable, will be obtained from the EIA’s Electricity Data Browser [@EIA2016]. This database includes information on electricity pricing from 2002-2016, allowing for both an inter-state comparison, as well as a temporal comparison. This website also provides a “deregulation indicator” and a “consumption data indicator.” The incorporation of these data points into our model will allow us to control for whether price changes are being driven by changes in consumer consumption. Finally, this website also provides an “energy generation” indicator, which will allow the model to control for whether or not the policy has discernable changes on the actual generation of renewable energy. Theoretically, if there is no change in renewable energy generated, any changes in price is not connected to RPS. The benefit of having all the quantitative data come from the same database is that it ensures that any differences between states are not a result of measurement definitional differences.
+
+Second, the analysis will include variables for whether or not the states use RPS policies, and the main requirements of these policies including escape clauses, thresholds, and time periods required for implementation. This data will be derived from the Database of State Incentive for Renewables and Efficiency “dsireusa” [@DSIRE2016].
+
+Finally, in order to measure compliance, the analysis will conduct a web scrapping of the American commissioner court case decisions. This web scrapping will be used to identify any variation in the state commissioner enforcement of RPS at the state level, and will search for the name of the relevant state policy.
+
+The identified policies, and the analysis of whether the state judges actually enforce the policies, will be evaluated against changes in electricity prices in an inter-state and inter-temporal comparison.
+
+# References
