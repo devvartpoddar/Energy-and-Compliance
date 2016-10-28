@@ -1,16 +1,19 @@
 ---
 title: "Energy and Compliance"
 author: "Emma Heffernan and Devvart Poddar"
-date: "21 October 2016"
-output: html_document
-bibliography: references.bib
+date: "28th October, 2016"
+output:
+  pdf_document:
+    number_section: true
+    toc: true
+bibliography: "references.bib"    
 ---
 
 # Introduction
 
 Rising electricity costs in developed nations has become the political topic du jour across OECD jurisdictions. The cost of electricity matters: the impact of rising electricity costs is felt most acutely by low-income individuals, who see a greater proportion of their pay checks directed towards their hydro bills. Given the economic difficulties caused by rising electricity prices, this is an ongoing topic of importance for academics and politicians alike.
 
-Much of the blame for rising electricity prices has been levied against government renewable energy policies [e.g. see @Ferguson2016, @Lynch2016,@Svaldi2016]. This perspective claims that the requirement that electricity generation is made up of more expensive renewable energy production will lead to higher costs. Indeed, as the U.S. Energy Information Administrative (EIA) claims that generation is responsible for 65% of average electricity prices, distribution accounts for 25% of average electricity prices, and transmission accounts for 9% of electricity prices @EIA2015, a rise in the cost of generating electricity may lead to increased prices.
+Much of the blame for rising electricity prices has been levied against government renewable energy policies [e.g. see @Ferguson2016,  @Lynch2016, @Svaldi2016]. This perspective claims that the requirement that electricity generation is made up of more expensive renewable energy production will lead to higher costs. Indeed, as the U.S. Energy Information Administrative (EIA) claims that generation is responsible for 65% of average electricity prices, distribution accounts for 25% of average electricity prices, and transmission accounts for 9% of electricity prices @EIA2015, a rise in the cost of generating electricity may lead to increased prices.
 
 The question that is left unanswered here is whether different degrees of judicial compliance with political regulations leads to different cost outcomes. In part, this gap in the literature is because much research has been limited to qualitative studies that select a few extreme cases, [e.g see @Netherlands2013] and quantitative studies that ignore issues of compliance with certain policies in their quantitative analysis [e.g. see @Wang2016]. These research efforts are invaluable; they provide an understanding of how outliers have implemented renewable energy policies, and of general trends assuming monolithic compliance models. However, we propose that an explanation of the link between renewable policy and electricity pricing can go further through a textual of the results of these commission’s judicial decisions and then evaluating potential correlations between compliance and cost in the United States. The choice of case study is because the similarity of federal policy, coupled with a difference in intensity in state policies, and potential differences in compliance, allows for a unique opportunity for differences-in-differences comparisons.
 
@@ -22,11 +25,13 @@ Renewable energy promotion policies are separated in the literature into two bro
 
 As this paper is primarily concerned with the impact of the increased utilization of renewable energy in a distribution grid on electricity prices, this paper will focus specifically on market-pull policies that incentivize the generation of renewable energy. There are two types of policies that incentivize the use of renewable energy generation in the electricity grid. The first is a market-based construction of generation incentives, and the second is generation promotion policies. These policies are summarized in the following table.
 
-|Policy|Price-Driven|Quantity-Driven|
-|---|---|---|
-|Generation Incentives|Feed-in tariffs|Tendering systems for long term contracts Energy|
-| |Premium feed-in tariffs	 |Portfolio standards (quotas)| 
-|Generation Promotion|Green Tariffs| |
+|Policy              |Price-Driven             |Quantity-Driven        |
+|--------------------|:----------------------|:----------------------|
+Generation Incentives|Feed-in tariffs        |Tendering systems for long term contracts Energy|
+|                    |Premium feed-in tariffs|Portfolio standards (quotas)| 
+|Generation Promotion|Green Tariffs          | |
+
+Table: Policies incentivising use of renewable energy generation 
 
 ## Feed-in Tariffs and Premium Feed-in Tariffs
 
@@ -62,4 +67,7 @@ Finally, in order to measure compliance, the analysis will conduct a web scrappi
 
 The identified policies, and the analysis of whether the state judges actually enforce the policies, will be evaluated against changes in electricity prices in an inter-state and inter-temporal comparison.
 
+\pagebreak
+
 # References
+
