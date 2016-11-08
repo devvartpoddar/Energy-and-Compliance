@@ -1,17 +1,5 @@
 # Scraping pdfs from Commisioner websites
 
-# Intialisation
-rm(list = ls())
-pkgs <- c("dplyr", "magrittr", "methods", "rvest", "stringi", "rio", "ggplot2")
-
-load <- sapply(pkgs, function(x) {
-    suppressPackageStartupMessages(
-      require(x, character.only = TRUE)
-    )
-  }
-)
-rm(load, pkgs)
-
 # Function for scraping single website calls (sans appellate-briefs)
 single.scrape <- function(URL) {
 
