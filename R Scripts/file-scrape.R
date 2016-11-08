@@ -81,5 +81,13 @@ for (x in web.scrape.list) {
     list.pdfs <- c(list.pdfs, list.links)
   }
 }
+rm(x, y, years, list.links)
 
 # Downloading all pdf files to Input/raw data
+for (x in 1:length(list.pdfs)) {
+  pdf.name <- paste0("Input/raw data/Text/", x, ".pdf")
+
+  download.file(list.pdfs[x], pdf.name, method = "libcurl")
+
+  message(paste("Finished dowloading", round(x / length(list.pdfs) * 100, 2), "% of data"))
+}
