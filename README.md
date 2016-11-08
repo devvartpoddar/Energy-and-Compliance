@@ -1,6 +1,6 @@
 # Energy-and-Compliance
 
-The repository is for the final data assignment for the course on **Collaboratove Data Science** at [Hertie School of Governance](https://www.hertie-school.org/home/). 
+The repository is for the final data assignment for the course on **Collaborative Data Science** at [Hertie School of Governance](https://www.hertie-school.org/home/). 
 
 ## About the Project
 
