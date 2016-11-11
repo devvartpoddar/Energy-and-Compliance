@@ -62,7 +62,7 @@ We plot the residential electricity prices to better understand their distributi
 source("R Scripts/EIA-data.R")
 
 data2 <- final.data %>%
-  summarise(x = 1.1 * mean(Prices)) %>%
+  dplyr::summarise(x = 1.1 * mean(Prices)) %>%
   mutate(y = 22,
          label= "Mean Price")
 
