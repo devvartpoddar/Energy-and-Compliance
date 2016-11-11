@@ -4,7 +4,9 @@
 # Function to try and read pdfs files
 read.pdf <- function(link) {
   # Function to try and read pdfs files
-  text <- try(pdf_text(link))
+  text <- suppressMessages(
+    try(pdf_text(link))
+    )
 
   # Returning Null if not a pdf
   if (inherits(text, "try-error")) return(NA)
