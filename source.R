@@ -3,7 +3,7 @@
 # Intialisation
 rm(list = ls())
 pkgs <- c("dplyr", "magrittr", "methods", "rvest", "stringi", "rio", "ggplot2",
-  "tm", "wordcloud", "viridis", "pdftools", "xml2")
+  "tm", "wordcloud", "viridis", "pdftools", "xml2", "EIAdata", "lubridate")
 
 load <- sapply(pkgs, function(x) {
     suppressPackageStartupMessages(
@@ -24,3 +24,5 @@ source("R Scripts/pdf-clean.R")
 
 # Creating wordclouds
 source("R Scripts/word-cloud.R")
+
+# Downloading data from EIA website

@@ -19,8 +19,7 @@ text.clean <- function(data, year) {
     tm_map(content_transformer(tolower)) %>%
     tm_map(removeWords, stopwords()) %>%
     TermDocumentMatrix() %>%
-    removeSparseTerms(0.5) %>%
-    rowSums()
+    removeSparseTerms(0.5)
 }
 
 Function to create a wordcloud
@@ -36,14 +35,13 @@ wordcloud.make <- function(tdm) {
 # Creatng word clouds
 text.data <- import("Output/processed data/pdf-text.json")
 
-temp.plot <- text.data %>%
-  text.clean(year = 2014) %>%
-  wordcloud.make()
+temp.freq <- text.data %>%
+  text.clean(year = 2014)
 
 png("Output/figures/wordcloud2014.png",
   width = 1200, height = 1200,
   res = 200, type = "cairo-png")
 
-  print(temp.plot)
+  print(wordcloud.make(temp.freq))
 
 dev.off()
