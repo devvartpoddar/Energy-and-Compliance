@@ -13,8 +13,12 @@ read.doc <- function(link, dir.path = "Input/raw data/Text/temp") {
   # Reading xml document
   xml.path <- paste0(dir.path, "/word/document.xml")
 
-  text <- read_xml(xml.path) %>%
-    xml_text()
+  text <- try(read_xml(xml.path) %>%
+    xml_text())
+
+  if (inherits(text, "try-error")) {
+    return("No text available")
+  }
 
   unlink(dir.path, recursive= TRUE)
 
@@ -33,9 +37,13 @@ read.pdf <- function(link) {
 
     message(paste0(link, " not a PDF file. Force reading as .doc"))
     # Renaming files as doc in system
-    filename <- stri_split_fixed(link, ".pdf") %>%
-      unlist() %>% .[1] %>%
-      paste0(".doc")
+    if (grepl(link, ".pdf")) {
+      filename <- stri_split_fixed(link, ".pdf") %>%
+        unlist() %>% .[1] %>%
+        paste0(".doc")
+    } else {
+      filename <- link
+    }
 
     try(file.rename(link, filename))
 
@@ -96,7 +104,7 @@ text.data <- data.frame(
   )
 
 # Loop
-for (x in 1:length(list.pdfs[1:40])) {
+for (x in 1:length(list.pdfs)) {
   pdf.path <- paste0("Input/raw data/Text/", list.pdfs[x])
 
   pdf.text <- read.pdf(pdf.path)
@@ -127,7 +135,7 @@ freq.plot <- text.data %>%
   labs(x = "Year", y = "Frequency of Judicial Decisions") +
   theme_bw()
 
-png("Output/figures/judicial-decisions-freq.png",
+png("Output/figures/decisions-freq.png",
   width = 1200, height = 1200,
   res = 200, type = "cairo-png")
 
