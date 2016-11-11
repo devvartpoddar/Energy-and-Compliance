@@ -21,3 +21,6 @@ source("R Scripts/file-scrape.R")
 
 # Read PDFs and basic frequency plots
 source("R Scripts/pdf-clean.R")
+
+# Creating wordclouds
+source("R Scripts/word-cloud.R")

@@ -124,7 +124,7 @@ text.data %<>%
   filter(!is.na(year))
 
 # Exporting data to Output/processed data
-export(text.data, "Output/processed data/pdf-text.csv")
+export(text.data, "Output/processed data/pdf-text.json")
 
 ## Plotting frequency of year of occurance
 freq.plot <- text.data %>%
