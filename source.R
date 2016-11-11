@@ -2,7 +2,8 @@
 
 # Intialisation
 rm(list = ls())
-pkgs <- c("dplyr", "magrittr", "methods", "rvest", "stringi", "rio", "ggplot2")
+pkgs <- c("dplyr", "magrittr", "methods", "rvest", "stringi", "rio", "ggplot2",
+  "tm", "wordcloud", "viridis", "pdftools")
 
 load <- sapply(pkgs, function(x) {
     suppressPackageStartupMessages(
@@ -17,3 +18,6 @@ try(setwd("/home/devvart/Desktop/Energy-and-Compliance"))
 
 # Downloading files from the websites
 source("R Scripts/file-scrape.R")
+
+# Read PDFs and basic frequency plots
+source("R Scripts/pdf-clean.R")
