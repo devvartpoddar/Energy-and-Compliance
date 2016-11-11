@@ -1,0 +1,56 @@
+---
+title: "Data and Methodology"
+author: "Emma Heffernan and Devvart Poddar"
+date: "11 November 2016"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+
+This paper aims to fill the gap in analysis conducted in the electricity pricing literature on the link between individual state implementation of Renewable Portfolio Standards (RPS) and electricity cost in the United States. In brief, the dominant argument states that requiring utilities to use more expensive renewable energy will drive up the cost of electricity for residents. Though this link has been replicated across studies, none of these studies have attempted to measure whether the state’s judicial bodies enforce RPS when confronted with utilities that do not adhere to these required standards. In other words, are there differences in the way that compliance is enforced in specific states?
+
+This paper will perform an introductory analysis of the data related to this question in two parts. First, we will download the residential retail electricity prices of each state by month from 2001-2016. This data is available on eia.gov.
+ 
+Second, this paper will download the year that RPS was implemented in each state. Specifically, the data will contain the binding year, the enactment year, and the effective year so that the relationship can control for lags in implementation. Then, this data will be combined with the retail electricity price data.
+
+The states that have implemented an RPS policy are outlined in the following table
+
+INSERT TABLE HERE
+
+```{r cars}
+summary(cars)
+```
+
+These states will be contrasted against the electricity pricing of states that do not have RPS standards. In the final analysis, we will control for temperature, deregulation, and inflation, but that is beyond the scope of the present analysis.
+
+Third, each states’ downloaded judicial court decisions will be used to assess how compliance is enforced in each state. A detailed analysis of these textual documents is beyond the scope of this assignment, but will be provided in the final analyses.
+
+# Electricity Prices and RPS
+
+## Electricity Prices
+The first task is to collect the data on electricity prices and RPS year implementations for each state. The data was collected from the US Department of Energy from 2001 to 2009. Second, the data on when various states implemented RPS was available on the dsirea website. These variables were “scraped” from the internet, and were condensed into a single dataset, as outlined in the code below.
+
+*Preliminary Note*: This code does not include the full initial “scraping” of the electricity price data. This is because the package used requires that users use their “**EIA API Registration Key**”, which is a personal piece of information that new users can obtain [here](http://www.eia.gov/opendata/register.cfm.). 
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+## RPS
+
+After, the data on the years that RPS was implemented in each state was obtained from the Hongbo Wang (2016)’s paper on RPS and electricity prices. Her data was originally obtained from dsirea.
+
+## Judicial decisions
+
+We also scrape the judicial decisions published on the EIA website. Note that this is without the appellate rulings. In total we get 303 decisions which are in either pdf or doc format. Also note that the rulings have not been published to Github due to data size contraints. But one can view all the textual data derived using the code
+
+``` {r judicial decisions}
+```
+
+Judicial decisions spike post 2010. Note our data had rulings pre 2005
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
