@@ -3,7 +3,7 @@
 # Intialisation
 rm(list = ls())
 pkgs <- c("dplyr", "magrittr", "methods", "rvest", "stringi", "rio", "ggplot2",
-  "tm", "wordcloud", "viridis", "pdftools")
+  "tm", "wordcloud", "viridis", "pdftools", "xml2")
 
 load <- sapply(pkgs, function(x) {
     suppressPackageStartupMessages(
