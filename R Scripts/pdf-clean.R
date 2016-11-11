@@ -44,11 +44,12 @@ read.pdf <- function(link) {
     } else {
       filename <- link
     }
-
+    suppressMessages(
     try(file.rename(link, filename))
-
+    )
+    suppressMessages(
     text <-  read.doc(filename)
-
+    )
     return(text)
   }
 
@@ -123,22 +124,22 @@ for (x in 1:length(list.pdfs)) {
 text.data %<>%
   filter(!is.na(year))
 
-# Exporting data to Output/processed data
-export(text.data, "Output/processed data/pdf-text.json")
-
-## Plotting frequency of year of occurance
-freq.plot <- text.data %>%
-  group_by(year) %>%
-  summarise(freq = n()) %>%
-  ggplot() +
-  geom_bar(aes(x = year, y = freq), stat = "identity") +
-  labs(x = "Year", y = "Frequency of Judicial Decisions") +
-  theme_bw()
-
-png("Output/figures/decisions-freq.png",
-  width = 1200, height = 1200,
-  res = 200, type = "cairo-png")
-
-  print(freq.plot)
-
-dev.off()
+# # Exporting data to Output/processed data
+# export(text.data, "Output/processed data/pdf-text.json")
+#
+# ## Plotting frequency of year of occurance
+# freq.plot <- text.data %>%
+#   group_by(year) %>%
+#   summarise(freq = n()) %>%
+#   ggplot() +
+#   geom_bar(aes(x = year, y = freq), stat = "identity") +
+#   labs(x = "Year", y = "Frequency of Judicial Decisions") +
+#   theme_bw()
+#
+# png("Output/figures/decisions-freq.png",
+#   width = 1200, height = 1200,
+#   res = 200, type = "cairo-png")
+#
+#   print(freq.plot)
+#
+# dev.off()

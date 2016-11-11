@@ -22,7 +22,7 @@ text.clean <- function(data, year) {
     removeSparseTerms(0.5)
 }
 
-Function to create a wordcloud
+#Function to create a wordcloud
 wordcloud.make <- function(tdm) {
   # RowSums of TDM
   freq <- as.matrix(tdm) %>%
@@ -35,13 +35,16 @@ wordcloud.make <- function(tdm) {
 # Creatng word clouds
 text.data <- import("Output/processed data/pdf-text.json")
 
-temp.freq <- text.data %>%
+freq2014 <- text.data %>%
   text.clean(year = 2014)
 
-png("Output/figures/wordcloud2014.png",
-  width = 1200, height = 1200,
-  res = 200, type = "cairo-png")
+freq2016 <- text.data %>%
+  text.clean(year = 2016)
 
-  print(wordcloud.make(temp.freq))
-
-dev.off()
+# png("Output/figures/wordcloud2014.png",
+#   width = 1200, height = 1200,
+#   res = 200, type = "cairo-png")
+#
+#   print(wordcloud.make(temp.freq))
+#
+# dev.off()

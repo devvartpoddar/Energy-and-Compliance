@@ -26,3 +26,4 @@ source("R Scripts/pdf-clean.R")
 source("R Scripts/word-cloud.R")
 
 # Downloading data from EIA website
+source("R Scripts/EIA-data.R")

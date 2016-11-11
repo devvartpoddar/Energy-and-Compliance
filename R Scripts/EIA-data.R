@@ -23,7 +23,8 @@ for (x in 1:length(states.abb)) {
     as.data.frame() %>%
     mutate(rowname = rownames(.),
       year = year(rowname),
-      month = month(rowname)) %>%
+      month = month(rowname),
+      State = states[x]) %>%
     select(-rowname)
 
   colnames(temp.data)[1] <- "Prices"
@@ -31,4 +32,14 @@ for (x in 1:length(states.abb)) {
   EIA.data <- rbind(temp.data, EIA.data)
 }
 
-export(EIA.data, "Output/processed data/EIA-data.csv")
+# Merge with RPS dataset
+rps.data <- import("Input/processed/RPS.csv")
+
+final.data <- merge(EIA.data, rps.data,
+    by.y = c("State", "1stEnactmentYear"), by.x = c("State", "year"))
+
+final.data <- merge(EIA.data, rps.data) %>%
+  group_by(State) %>%
+  mutate(RPS = ifelse(year < `1stEnactmentYear`, 0, 1))
+
+export(final.data, "Output/processed data/EIA-data.csv")
