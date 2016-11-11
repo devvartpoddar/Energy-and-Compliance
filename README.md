@@ -9,6 +9,9 @@ Rising electricity costs in developed nations has become the political topic du 
 
 We question whether *different degrees of judicial compliance with political regulations leads to different cost outcomes*. Our project will deal with measuring complicance through American commissioner court decisions to identify impact on residential electricty pricing.
 
+### Assignment 3 Files
+**Note:** The Rmd file as well as the pdf for assignment 3 is located in the folder "Data and Methodolgy".
+
 ### Running Knitr
 
 The pdf otputs were createred using **KnitR** and **Rmarkdown** on R. In order to install the package please run the following commands.
