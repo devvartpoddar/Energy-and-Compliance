@@ -1,6 +1,26 @@
 # Reading PDF files and cleaning it into years
 
 ## Functions
+# Function to read doc files
+read.doc <- function(link, dir.path = "Input/raw data/Text/temp") {
+  # create and empty directory to unzip doc files
+  if (!dir.exists(dir.path)) {
+    dir.create(dir.path)
+  }
+  # Unziping doc files
+  unzip(link, exdir = dir.path)
+
+  # Reading xml document
+  xml.path <- paste0(dir.path, "/word/document.xml")
+
+  text <- read_xml(xml.path) %>%
+    xml_text()
+
+  unlink(dir.path, recursive= TRUE)
+
+  return(text)
+}
+
 # Function to try and read pdfs files
 read.pdf <- function(link) {
   # Function to try and read pdfs files
@@ -9,9 +29,22 @@ read.pdf <- function(link) {
     )
 
   # Returning Null if not a pdf
-  if (inherits(text, "try-error")) return(NA)
+  if (inherits(text, "try-error")) {
 
-  # Cleaning text partially and returning as string
+    message(paste0(link, " not a PDF file. Force reading as .doc"))
+    # Renaming files as doc in system
+    filename <- stri_split_fixed(link, ".pdf") %>%
+      unlist() %>% .[1] %>%
+      paste0(".doc")
+
+    try(file.rename(link, filename))
+
+    text <-  read.doc(filename)
+
+    return(text)
+  }
+
+  # Cleaning text whitespace and returning as string
   text %<>% stri_split_fixed(" ") %>%
     unlist() %>% trimws() %>%
     paste(collapse = " ")
@@ -57,18 +90,18 @@ list.pdfs <- list.files("Input/raw data/Text", pattern = ".pdf")
 
 # Blank Dataset
 text.data <- data.frame(
-  text = rep("NA", length(list.pdfs)),
+  path = rep("NA", length(list.pdfs)),
   year = rep(NA, length(list.pdfs)),
   stringsAsFactors = FALSE
   )
 
 # Loop
-for (x in 1:length(list.pdfs)) {
+for (x in 1:length(list.pdfs[1:40])) {
   pdf.path <- paste0("Input/raw data/Text/", list.pdfs[x])
 
   pdf.text <- read.pdf(pdf.path)
 
-  text.data$text[x] <- as.character(pdf.text)
+  text.data$path[x] <- as.character(pdf.text)
   text.data$year[x] <- find.year(pdf.text)
 
   rm(pdf.text)
