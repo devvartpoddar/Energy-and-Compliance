@@ -2,8 +2,10 @@
 title: "Data and Methodology"
 author: "Emma Heffernan and Devvart Poddar"
 date: "11 November 2016"
-output: pdf_document
-  toc: true
+output: 
+  pdf_document:
+    toc: true
+    number_sections: true
 ---
 
 \pagebreak
@@ -61,14 +63,16 @@ We plot the residential electricity prices to better understand their distributi
 ```{r pressure, echo=FALSE, cache=2}
 source("R Scripts/EIA-data.R")
 
+final.data <- import("Output/processed data/EIA-data.csv")
+
 data2 <- final.data %>%
-  dplyr::summarise(x = 1.1 * mean(Prices)) %>%
-  mutate(y = 22,
+  dplyr::summarise(x = 1.2 * mean(Prices)) %>%
+  mutate(y = 420,
          label= "Mean Price")
 
 ggplot(final.data) +
   geom_histogram(aes(Prices), bins = 25) +
-  geom_linerange(aes(x = mean(Prices), ymin = 0, ymax = 24),
+  geom_linerange(aes(x = mean(Prices), ymin = 0, ymax = 440),
                  colour = "#B22222", alpha = 0.7) +
   geom_text(data = data2, aes(x = x, y = y, label = label)) +
   labs(x = "Distribution of Prices")  +
@@ -86,7 +90,7 @@ After, the data on the years that RPS was implemented in each state was obtained
 
 We also scrape the judicial decisions published on the EIA website. Note that this is without the appellate rulings. In total we get 303 decisions which are in either pdf or doc format. Also note that the rulings have not been published to Github due to data size contraints. But one can view all the textual data derived. We visualise the frequency of the rulings;
 
-``` {r judicialdecisions, echo = FALSE, cache=3}
+``` {r judicialdecisions, echo = FALSE, cache=3, warning = FALSE, message = FALSE}
 source("R Scripts/pdf-clean.R")
 ```
 ``` {r judicialdecisions1, echo = FALSE, cache=3}
@@ -108,7 +112,7 @@ We also create wordclouds to figure out what is changing in the discussion. The 
 ``` {r wordcloud, echo = FALSE, cache = 3}
 source("R Scripts/word-cloud.R")
 ```
-``` {r wordcloud1, echo = FALSE, cache = 3}
+``` {r wordcloud1, echo = FALSE, cache = 3, warning = FALSE}
 par(mfrow=c(1,2))
 wordcloud.make(freq2014)
 wordcloud.make(freq2016)
@@ -130,7 +134,7 @@ frq.data <- import("Output/processed data/pdf-text.json") %>%
 
 reg.model <- lm(Prices ~ RPS + Freq, frq.data)
 ```
-```{r stargazer}
+```{r stargazer, echo = FALSE, results="asis"}
 stargazer(reg.model,
           covariate.labels = c("RPS", "Frequency of Judicial Decisions"),
           header = FALSE,

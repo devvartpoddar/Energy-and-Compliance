@@ -35,11 +35,9 @@ for (x in 1:length(states.abb)) {
 # Merge with RPS dataset
 rps.data <- import("Input/processed/RPS.csv")
 
-final.data <- merge(EIA.data, rps.data,
-    by.y = c("State", "1stEnactmentYear"), by.x = c("State", "year"))
-
 final.data <- merge(EIA.data, rps.data) %>%
   group_by(State) %>%
-  mutate(RPS = ifelse(year < `1stEnactmentYear`, 0, 1))
+  mutate(RPS = ifelse(year < `1stEnactmentYear`, 0, 1)) %>%
+  ungroup()
 
 export(final.data, "Output/processed data/EIA-data.csv")
