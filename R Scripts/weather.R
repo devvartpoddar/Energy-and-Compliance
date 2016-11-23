@@ -11,5 +11,8 @@ weather<-weather[-c(1, 2, 3), ]
 #separate the first column into "Year" and "Month" to make merging with other datasets easier.
 weather <- cbind(year=substr(weather[, 1],1,4), month=substr(weather[, 1],5,6), weather[, -1])
 
+#rename column "3" to temperature
+colnames(weather)[3]<-"temperature"
+
 #export dataset
 write.csv(weather, "weather.csv")
