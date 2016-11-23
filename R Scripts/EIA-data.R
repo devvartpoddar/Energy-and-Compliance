@@ -40,4 +40,10 @@ final.data <- merge(EIA.data, rps.data) %>%
   mutate(RPS = ifelse(year < `1stEnactmentYear`, 0, 1)) %>%
   ungroup()
 
-export(final.data, "Output/processed data/EIA-data.csv")
+# Merge with Weather dataset
+final.data1<-merge(EIA, weather, by=c("year", "month"))
+
+# Merge with Deregulation Dataset
+merged.data<-merge(final.data1, der, by="state")
+
+export(merged.data, "Output/processed data/merged-data.csv")
