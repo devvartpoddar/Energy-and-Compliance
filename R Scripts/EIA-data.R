@@ -47,6 +47,6 @@ final.data1<-merge(EIA, weather, by=c("year", "month"))
 merged.data<-merge(final.data1, der, by="state")
 
 #Merge with President dataset
-merged.data1,_merge(merged.data, pres, by=c("state", "year"))
+merged.data1 <- merge(merged.data, pres, by=c("state", "year"))
 
-export(merged.data1, "Output/processed data/merged-data1.csv")
+export(merged.data1, "Output/processed data/mergeddata.csv")

@@ -1,6 +1,3 @@
-# download and use revelant package
-library("RCurl")
-
 # scrape the data from the NCDC website
 x <-getURL("https://www.ncdc.noaa.gov/cag/time-series/us/110/00/tavg/all/01/2001-2016.csv")
 weather <- read.csv(text = x)

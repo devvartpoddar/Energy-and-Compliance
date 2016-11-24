@@ -20,7 +20,7 @@ The pdf otputs were createred using **KnitR** and **Rmarkdown** on R. In order t
 install.packages(c("knitr", "rmarkdown"))
 ```
 
-**NOTE:** There are several other packages which our also utilised and should be installed (Please look at the source file for a complete list of packages called ```pkgs```). The code uses the command ```require()``` which is a wrapper around ```library()``` . It does not stop the execution of the script if the package is not installed. 
+**NOTE:** There are several other packages which our also utilised and should be installed (Please look at the source file for a complete list of packages called ```pkgs```). The code uses the command ```require()``` which is a wrapper around ```library()``` . It does not stop the execution of the script if the package is not installed.
 
 
 Once installed, please open the RMD file to create the pdf. You can use the functionality provided in Rstudio, or run the following command in R.
@@ -34,7 +34,7 @@ rmarkdown::render("Data.Rmd")
 
 ## TODO:
 
-- [ ] Download residential prices and covariates for regression
-- [ ] Identify Commissioner court website archives and scrape court rulings
+- [x] Download residential prices and covariates for regression
+- [x] Identify Commissioner court website archives and scrape court rulings
 - [ ] Indentify measure of compliance.
 - [ ] Visualise!

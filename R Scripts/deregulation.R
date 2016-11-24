@@ -1,6 +1,3 @@
-# download and load relevant packages
-library("XML")
-
 # scrape the data from the electric choice URL
 url<-"http://www.electricchoice.com/map-deregulated-energy-markets/"
 tbls<-readHTMLTable(url)
