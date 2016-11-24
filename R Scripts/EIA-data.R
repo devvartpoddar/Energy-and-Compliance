@@ -46,4 +46,7 @@ final.data1<-merge(EIA, weather, by=c("year", "month"))
 # Merge with Deregulation Dataset
 merged.data<-merge(final.data1, der, by="state")
 
-export(merged.data, "Output/processed data/merged-data.csv")
+#Merge with President dataset
+merged.data1,_merge(merged.data, pres, by=c("state", "year"))
+
+export(merged.data1, "Output/processed data/merged-data1.csv")
