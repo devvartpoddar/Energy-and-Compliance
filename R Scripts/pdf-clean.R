@@ -99,7 +99,7 @@ list.pdfs <- list.files("Input/raw data/Text", pattern = ".pdf")
 
 # Blank Dataset
 text.data <- data.frame(
-  path = rep("NA", length(list.pdfs)),
+  text = rep("NA", length(list.pdfs)),
   year = rep(NA, length(list.pdfs)),
   stringsAsFactors = FALSE
   )
@@ -110,7 +110,7 @@ for (x in 1:length(list.pdfs)) {
 
   pdf.text <- read.pdf(pdf.path)
 
-  text.data$path[x] <- as.character(pdf.text)
+  text.data$text[x] <- as.character(pdf.text)
   text.data$year[x] <- find.year(pdf.text)
 
   rm(pdf.text)
@@ -124,9 +124,9 @@ for (x in 1:length(list.pdfs)) {
 text.data %<>%
   filter(!is.na(year))
 
-# # Exporting data to Output/processed data
-# export(text.data, "Output/processed data/pdf-text.json")
-#
+# Exporting data to Output/processed data
+export(text.data, "Output/processed data/pdf-text.json")
+
 # ## Plotting frequency of year of occurance
 # freq.plot <- text.data %>%
 #   group_by(year) %>%

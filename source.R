@@ -4,7 +4,7 @@
 rm(list = ls())
 pkgs <- c("dplyr", "magrittr", "methods", "rvest", "stringi", "rio", "ggplot2",
   "tm", "wordcloud", "viridis", "pdftools", "xml2", "EIAdata", "lubridate", "RCurl",
-  "plyr", "reshape2", "XML")
+  "plyr", "reshape2", "XML", "koRpus")
 
 load <- sapply(pkgs, function(x) {
     suppressPackageStartupMessages(
@@ -17,16 +17,20 @@ rm(load, pkgs)
 # Settng working directory
 try(setwd("/home/devvart/Desktop/Energy-and-Compliance"))
 
+## Text
 # Downloading files from the websites
 source("R Scripts/file-scrape.R")
 
 # Read PDFs and basic frequency plots
 source("R Scripts/pdf-clean.R")
 
+#Cleaning text
+source("R Scripts/text-mining.R")
+
 # Creating wordclouds
 source("R Scripts/word-cloud.R")
 
-# Downloading and merging datasets
+## Downloading and merging datasets
 # Voted for president
 source("R Scripts/president.R")
 ## Weather
