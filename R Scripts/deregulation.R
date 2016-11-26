@@ -16,4 +16,4 @@ der %<>%
   dplyr::rename(eyear = Year)
 
 #Export the dataset
-write.csv(der, "Output/processed data/dereg.csv")
+write.csv(der, "Input/processed/dereg.csv")

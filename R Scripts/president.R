@@ -25,7 +25,7 @@ pres<-rename(pres, c("variable"="dyear","value"="%"))
 pres <- cbind(party=substr(pres[,2],1,3), year=substr(pres[,2],4,7), pres[, -2])
 
 #export the data
-write.csv(pres, "Output/processed data/president.csv")
+write.csv(pres, "Input/processed/president.csv")
 
 # Downloading data on weather
 source("R Scripts/weather.R")

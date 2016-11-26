@@ -30,5 +30,7 @@ source("R Scripts/text-mining.R")
 # Creating wordclouds
 # source("R Scripts/word-cloud.R")
 
-## Downloading datasets
+## Downloading  and merging datasets
 source("R Scripts/president.R")
+
+source("R Scripts/merging-data.R")

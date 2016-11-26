@@ -6,14 +6,14 @@ rps.data <- import("Input/processed/RPS.csv") %>%
 colnames(rps.data) <- c("State", "rps.year")
 
 # Importing EIA data
-EIA.data <- import("Output/processed data/EIA-data.csv")
+EIA.data <- import("Input/processed/EIA-data.csv")
 
 # Changing name of two states
 EIA.data$State[EIA.data$State == "Massachusets"] <- "Massachusetts"
 EIA.data$State[EIA.data$State == "Conneticut"] <- "Connecticut"
 
 # Importing president data
-presidents.data <- import("Output/processed data/president.csv") %>%
+presidents.data <- import("Input/processed/president.csv") %>%
   select(-V1)
 
 colnames(presidents.data)[4] <- "PercentageofVote"
@@ -34,12 +34,12 @@ presidents.data %<>%
   filter(State != "Hawaii")
 
 # Importing weather data
-weather.data <- import("Output/processed data/weather.csv") %>%
+weather.data <- import("Input/processed/weather.csv") %>%
   select(-V1) %>%
   mutate_each(funs(as.numeric))
 
 # Importing deregulation data
-deregulation.data <- import("Output/processed data/dereg.csv") %>%
+deregulation.data <- import("Input/processed/dereg.csv") %>%
   select(-V1) %>%
   transform(eyear = as.numeric(eyear)) %>%
   # Removing Hawaii
@@ -47,6 +47,26 @@ deregulation.data <- import("Output/processed data/dereg.csv") %>%
 
 # Giving NA values an exceedingly high value that is not possible
 deregulation.data$eyear[is.na(deregulation.data$eyear)] <- 9999
+
+# Importing text data
+text.data <- import("Input/processed/text-words.csv") %>%
+  group_by(year) %>%
+  mutate(
+    renewable.ave = renewable / total,
+    pollution.ave = pollution / total,
+    order.ave = order / total
+    ) %>%
+  dplyr::summarize(
+    count = n(),
+    order = mean(order),
+    renewable = mean(renewable),
+    pollution = mean(pollution),
+    order.ave = mean(order.ave),
+    renewable.ave = mean(renewable.ave),
+    pollution.ave = mean(pollution.ave),
+    total = mean(total)
+    ) %>%
+  ungroup()
 
 # Merging EIA and RPS
 final.data <- merge(EIA.data, rps.data, by = "State", all = T) %>%
@@ -60,13 +80,12 @@ final.data <- merge(EIA.data, rps.data, by = "State", all = T) %>%
 final.data %<>%
   merge(presidents.data, by = c("State", "year"), all = T) %>%
   arrange(State, year, month) %>%
-  group_by(State, year, month) %>%
+  group_by(State) %>%
   mutate(
     party = na.locf(party),
     PercentageofVote = na.locf(PercentageofVote)
     ) %>%
-  ungroup() %>%
-  filter(year > 2000)
+  ungroup()
 
 # Merge with Weather dataset
 final.data  %<>%
@@ -79,5 +98,10 @@ final.data %<>%
   merge(deregulation.data, all = T) %>%
   mutate(Electric = ifelse(year < eyear, 0, 1)) %>%
   select(-eyear)
+
+# Merging with text data
+final.data %<>%
+  merge(text.data, all = T) %>%
+  arrange(State, year, month)
 
 export(final.data, "Output/processed data/mergeddata.csv")

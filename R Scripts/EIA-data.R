@@ -31,4 +31,4 @@ for (x in 1:length(states.abb)) {
   EIA.data <- rbind(temp.data, EIA.data)
 }
 
-export(EIA.data, "Output/processed data/EIA-data.csv")
+export(EIA.data, "Input/processed/EIA-data.csv")

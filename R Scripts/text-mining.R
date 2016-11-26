@@ -28,10 +28,6 @@ text.data %<>% filter(!is.na(year)) %>%
       order = NA,
       total = NA)
 
-nrow(text.data)
-
-# sstr(text.data)
-
 for (x in 1:nrow(text.data)) {
   text <- text.data$clean.text[x]
 
@@ -47,21 +43,7 @@ for (x in 1:nrow(text.data)) {
   text.data$total[x] <- total
 }
 
-final.data <- text.data %>%
-  mutate(renewable.mean = renewable / total,
-      order.mean = order / total,
-      pollution.mean = pollution / total)
+text.data %<>%
+  select(-clean.text)
 
-final.data %>%
-  filter(renewable.mean > 0 & renewable.mean < 0.0025) %>%
-  ggplot() +
-  geom_point(aes(x = renewable.mean, y = order.mean)) +
-  geom_smooth(aes(x = renewable.mean, y = order.mean))
-
-lm(order ~ renewable  + year + pollution, data = final.data) %>% summary()
-
-hist(final.data$order.mean)
-
-str(final.data)
-
-cor(final.data[, c(1, 6:8)])
+export(text.data, "Input/processed/text-words.csv")

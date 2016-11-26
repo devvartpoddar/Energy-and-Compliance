@@ -13,4 +13,4 @@ weather <- cbind(year=substr(weather[, 1],1,4), month=substr(weather[, 1],5,6), 
 colnames(weather)[3]<-"temperature"
 
 #export dataset
-write.csv(weather, "Output/processed data/weather.csv")
+write.csv(weather, "Input/processed/weather.csv")
