@@ -4,7 +4,7 @@
 rm(list = ls())
 pkgs <- c("dplyr", "magrittr", "methods", "rvest", "stringi", "rio", "ggplot2",
   "tm", "wordcloud", "viridis", "pdftools", "xml2", "EIAdata", "lubridate", "RCurl",
-  "plyr", "reshape2", "XML", "koRpus", "zoo")
+  "plyr", "reshape2", "XML", "koRpus", "zoo", "plm")
 
 load <- sapply(pkgs, function(x) {
     suppressPackageStartupMessages(
@@ -34,3 +34,5 @@ source("R Scripts/text-mining.R")
 source("R Scripts/president.R")
 
 source("R Scripts/merging-data.R")
+
+## Basic regressions
