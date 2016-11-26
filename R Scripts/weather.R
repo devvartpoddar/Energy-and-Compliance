@@ -1,3 +1,4 @@
+# Downloading data on weather
 # scrape the data from the NCDC website
 x <-getURL("https://www.ncdc.noaa.gov/cag/time-series/us/110/00/tavg/all/01/2001-2016.csv")
 weather <- read.csv(text = x)
@@ -12,4 +13,4 @@ weather <- cbind(year=substr(weather[, 1],1,4), month=substr(weather[, 1],5,6), 
 colnames(weather)[3]<-"temperature"
 
 #export dataset
-write.csv(weather, "weather.csv")
+write.csv(weather, "Output/processed data/weather.csv")

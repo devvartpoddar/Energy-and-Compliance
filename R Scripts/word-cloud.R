@@ -41,6 +41,9 @@ freq2014 <- text.data %>%
 freq2016 <- text.data %>%
   text.clean(year = 2016)
 
+rm(list = ls())
+gc()
+
 wordcloud.make(freq2016)
 
 # png("Output/figures/wordcloud2014.png",

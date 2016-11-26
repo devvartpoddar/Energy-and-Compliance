@@ -1,3 +1,4 @@
+# Downloading dataset on presidential voting pattern
 #download the data
 x<-getURL("http://www.electoral-vote.com/evp2016/Info/elections-1900-to-2012.csv")
 pres<-read.csv(text=x)
@@ -24,4 +25,13 @@ pres<-rename(pres, c("variable"="dyear","value"="%"))
 pres <- cbind(party=substr(pres[,2],1,3), year=substr(pres[,2],4,7), pres[, -2])
 
 #export the data
-write.csv(pres, "president.csv")
+write.csv(pres, "Output/processed data/president.csv")
+
+# Downloading data on weather
+source("R Scripts/weather.R")
+
+# Downloading data on deregulation
+source("R Scripts/deregulation.R")
+
+# Downloading data from EIA
+source("R Scripts/EIA-data.R")
