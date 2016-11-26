@@ -33,13 +33,15 @@ wordcloud.make <- function(tdm) {
 }
 
 # Creatng word clouds
-text.data <- import("Output/processed data/pdf-text.json")
+text.data <- import("Output/processed data/text-clean.json")
 
 freq2014 <- text.data %>%
   text.clean(year = 2014)
 
 freq2016 <- text.data %>%
   text.clean(year = 2016)
+
+wordcloud.make(freq2016)
 
 # png("Output/figures/wordcloud2014.png",
 #   width = 1200, height = 1200,

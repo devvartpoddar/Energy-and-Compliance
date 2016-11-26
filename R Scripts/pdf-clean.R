@@ -127,19 +127,6 @@ text.data %<>%
 # Exporting data to Output/processed data
 export(text.data, "Output/processed data/pdf-text.json")
 
-# ## Plotting frequency of year of occurance
-# freq.plot <- text.data %>%
-#   group_by(year) %>%
-#   summarise(freq = n()) %>%
-#   ggplot() +
-#   geom_bar(aes(x = year, y = freq), stat = "identity") +
-#   labs(x = "Year", y = "Frequency of Judicial Decisions") +
-#   theme_bw()
-#
-# png("Output/figures/decisions-freq.png",
-#   width = 1200, height = 1200,
-#   res = 200, type = "cairo-png")
-#
-#   print(freq.plot)
-#
-# dev.off()
+# Message and source
+message("Starting lemmatising. This might take some time ----------------- ")
+source("R Scripts/text-cleaning.R")

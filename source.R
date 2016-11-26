@@ -19,23 +19,23 @@ try(setwd("/home/devvart/Desktop/Energy-and-Compliance"))
 
 ## Text
 # Downloading files from the websites
-source("R Scripts/file-scrape.R")
+# source("R Scripts/file-scrape.R")
 
-# Read PDFs and basic frequency plots
-source("R Scripts/pdf-clean.R")
+# Read PDFs and cleaning
+# source("R Scripts/pdf-clean.R")
 
-#Cleaning text
+#Reading words
 source("R Scripts/text-mining.R")
 
 # Creating wordclouds
-source("R Scripts/word-cloud.R")
+# source("R Scripts/word-cloud.R")
 
 ## Downloading and merging datasets
 # Voted for president
-source("R Scripts/president.R")
+# source("R Scripts/president.R")
 ## Weather
-source("R Scripts/weather.R")
+# source("R Scripts/weather.R")
 ## Deregulation
-source("R Scripts/deregulation.R")
+# source("R Scripts/deregulation.R")
 ## EIA data and Merging
-source("R Scripts/EIA-data.R")
+# source("R Scripts/EIA-data.R")
