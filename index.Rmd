@@ -1,5 +1,5 @@
 ---
-title       : Energy Compliance
+title       : Reverberation and Energy Policy in the United States
 subtitle    : Do federal policies reverberate in regional prices
 author      : Emma Heffernan and Devvart Poddar
 framework   : revealjs        # {io2012, html5slides, shower, dzslides, ...}
@@ -7,31 +7,339 @@ revealjs    :
  transition: linear
  center: "false"
 highlighter : highlight.js  # {highlight.js, prettify, highlight}
-hitheme     : moon      # 
 widgets     : [mathjax]            # {mathjax, quiz, bootstrap}
-bootstrap:
-  theme: 
 mode        : selfcontained # {standalone, draft}
-menu:
-  - {item: Home, href: "#", class: active}
 knit        : slidify::knit2slides
----
+--- .bg
 
-<!-- Trying to refer to a different stylesheet-->
+<!-- Loading Required packages -->
+``` {r loadpackages, echo = FALSE, results = "hide", message=FALSE, warning=FALSE}
+load <- c("dplyr", "magrittr", "ggplot2", "plm", "rio", "slidify", "slidifyLibraries", "lubridate", "gganimate", "tm", "koRpus", "stringi")
+
+lapply(load, require, character.only = T)
+```
+
+<!-- Refering to a different stylesheet-->
 <head>
   <link rel="stylesheet" href="assets/css/white.css">
 </head>
 
-## Read-And-Delete
+<!-- Front Page -->
+## Reverberation and Energy Policy in the United States
+<br> <br> <br> <br> <br>
 
-1. Edit YAML front matter
-2. Write using R Markdown
-3. Use an empty line followed by three dashes to separate slides!
+<small>Emma Heffernan & Devvart Poddar</small>
 
---- .class #id 
+---
 
-## Slide 2
+## Introduction
+<br>
+
+<ul style="list-style-type:square" class="wrapper">
+  <li>
+    <small>
+      Rising electricity costs in developed nations has become the political topic <i>du jour</i>
+      across OECD jurisdictions. The cost of electricity matters: the impact of rising electricity
+      costs is felt most acutely by low-income individuals
+    </small>
+  </li>
+  <br>
+  <li class="fragment">
+    <small>
+      Much of the blame for rising electricity prices has been levied against government
+      renewable energy policies
+    </small>
+  </li>
+  <br>
+  <li class="fragment">
+    <small>
+      We argue that as the federal energy court gives more legitimacy to renewable
+      energy policies and goals, this increased legitimacy will result in the implementation
+      of more renewable energy policies in states.
+    </small>
+  </li>
+</ul>
+
+--- &vertical
+
+## Theoretical Framework
+<br>
+
+<ul style="list-style-type:square" class="wrapper">
+  <li>
+    <small>
+      Robert Putnam (1988): <b>Two-level games</b>. Theorises the concept of reverberation; <i>"lnternational pressures can
+      reverberate within domestic politics”</i>  subsequently altering the
+      position of domestic civic society groups
+    </small>
+  </li>
+  <br>
+  <li class="fragment">
+    <small>
+      We will use a modified version of this theory to model how the federal and state spheres interact in the United States
+    </small>
+  </li>
+  <br>
+  <li class="fragment">
+    <small>
+      ADD IMAGE HERE
+    </small>
+  </li>
+</ul>
+
+--- &vertical
+
+## Data & Method
+<br>
+
+<ul style="list-style-type:square" class="wrapper">
+  <li>
+    <small>
+      Data sourced from multiple web sources. We get data on renewable electricity prices
+      from EIA for all states (except Hawaii) and for a time period of 15 years
+    </small>
+  </li>
+  <br>
+  <li class="fragment">
+    <small>
+      We use the presence of Renewable Portfolio Standards (RPS) using data from <thead>
+      study by <b>WHO AGAIN</b>?
+      </thead>
+    </small>
+  </li>
+  <br>
+  <li class="fragment">
+    <small>
+      Finally we measure federal level policies in terms of their enforcement and focus on
+      renewable energy standards. We get this from the Federal Energy Regulatory Commission
+      (FERC) for 2001 onwards.
+    </small>
+  </li>
+</ul>
+
+***
+
+### Seasonal Trend in Prices;
+
+```{r pricetrend, echo = FALSE}
+prices.data <- import("./Output/processed data/mergeddata.csv") %>%
+  mutate(time = ymd(paste0(year, "-", month, "-01"))) %>%
+  group_by(time) %>%
+  summarise(mean = mean(Prices)) %>%
+  mutate(year = year(time)) %>%
+  as.data.frame()
+```
+``` {r plottrend, echo = FALSE, fig.align='center', fig.show="animate", interval=0.3, warning = FALSE, cache = 2, out.width="", message=FALSE}
+p <- ggplot(prices.data) +
+  geom_line(aes(time, mean, group = 1, frame = year, cumulative = T)) +
+  labs(y = "Electricity Prices", title = "Year; ") +
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
+  scale_y_continuous(breaks = 7:13) +
+  theme_bw() +
+  theme(
+    axis.title.x = element_blank()
+  )
+
+gg_animate(p)
+
+```
+
+***
+
+### Distilling Text
+
+<small> <b>What it looks like before;</b> </small>
+
+<div class="fragment">
+
+  ```{r before, echo=FALSE, results="asis"}
+
+  text <- "10. The Tribe argues that PacifiCorp is not taking action to obtain water quality
+  certification and thus is not diligently pursuing its license application.8
+   The Tribe
+  therefore asks the Commission to dismiss the relicense application and require the
+  company to file a plan to decommission the project.9
+  11. We agree with the Tribe that the circumstances of this case are far from ideal.
+  As noted above, Commission staff issued the EIS in November 2007. The Commission
+  could act on PacifiCorp’s application but for the absence of water quality certification.10
+  The Klamath Project is operating under the terms of the 1954 license, and, as a result, the
+  many environmental benefits that could accrue under the new license have not
+  occurred.11 Under the express terms of the Clean Water Act, however, the Commission "
+
+format_text <- paste("<p style='text-align:justify;'> <small>",
+                     text, "</small> </p>")
+
+cat(format_text)
+  ```
+</div>
+
+<small> <b>What it looks like after; </b> </small>
+
+<div class="fragment">
+
+``` {r after, echo = F, results = "asis"}
+text.clean <- function(text) {
+  text <- as.character(text)
+
+  # Defining extra words
+  extra.words <- c("united", "states", "america", "pdf", "ferc")
+
+  # Removing stop words, punctation, numbers, special charcters and whitespace
+  text %<>%
+    stri_replace_all_regex("[[:punct:]]|\\$|\\+", "") %>%
+    stri_replace_all_regex("\\s+", " ") %>%
+    VectorSource() %>%
+    VCorpus() %>%
+    tm_map(content_transformer(tolower)) %>%
+    tm_map(removeNumbers) %>%
+    tm_map(removeWords, stopwords()) %>%
+    tm_map(removeWords, extra.words) %>%
+    # sapply(`[`, "content") %>%
+    sapply(as.character)
+
+  return(text)
+}
+
+# Lemmatising text to convert to tokens
+text.lemma <- function(text) {
+  text <- as.character(text) %>%
+    tolower()
+
+  # Create a lemma dataframe of the text
+  ## Creating a temporary file
+  file.con <- file("temp.txt")
+  writeLines(text, file.con)
+  close(file.con)
+
+  # Creating temporary dataframe with lemma
+  temp.data <- treetag("temp.txt",
+    treetagger = "manual",
+    lang = "en",
+    TT.options = list(
+      path = "/home/devvart/treetagger",
+      preset = "en"
+      ))
+
+  temp.data <- temp.data@TT.res %>%
+    select(token, lemma) %>%
+    mutate(
+      lemma = ifelse(lemma == "<unknown>", token, lemma)
+      )
+
+  file.remove("temp.txt")
+
+  # Replacing words with their lemma
+  for (x in 1:nrow(temp.data)) {
+    # Values
+    token <- paste0("\\b", temp.data$token[x], "\\b")
+    # token <- temp.data$token[x]
+    lemma <- temp.data$lemma[x]
+
+    # Replacing
+    error <- try(text %<>% stri_replace_all_regex(token, lemma))
+
+    if (inherits(error, "try-error")) {
+      message.text <- paste0(token, " ----- ", lemma)
+      message(message.text)
+      stop("Stopping cleaning until error resolves")
+    }
+  }
+
+  # Removing text spaces
+  text %<>% stri_replace_all_regex("\\s+", " ")
+
+  return(text)
+}
+
+new_text <- text %>%
+  text.clean() %>%
+  text.lemma()
+
+format_text <- paste("<p style='text-align:justify;'> <small>",
+                     new_text, "</small> </p>")
+
+cat(format_text)
+```
+
+</div>
+
+--- &vertical
+
+## Variables; A snapshot
+ <br>
+
+``` {r summarytable, echo = FALSE, results = "asis"}
+load.data <- import("./Output/processed data/mergeddata.csv") %>%
+  mutate(context_30 = context_30 * 100,
+         order.ave = order.ave * 100,
+         renewable.ave = renewable.ave * 100) %>%
+  select(Prices, RPS, Electric, order.ave, renewable.ave, context_30, temperature)
+
+summary.func <- function(x) {
+  c(Mean = mean(x, na.rm = T),
+    Median = median(x, na.rm = T),
+    Min = min(x, na.rm = T),
+    Max = max(x, na.rm = T)
+  )
+}
+
+tablecode <- function(df, tabletype="gridtable"){
+  tmp <- noquote(apply(df, 1, function(x) paste0("<td style='text-align:center' data-th='", sprintf("%s",colnames(df)), "'>", x, "</td>", collapse=" ")))
+
+  cat(
+  c(
+  noquote(paste0("<table id='", tabletype,"' style='width:100% text-align:center;'> ")),
+  noquote(paste0("<tr>", paste0("<th>", sprintf("%s",colnames(df)), "</th>", collapse=" "), "</tr>")),
+  noquote(unlist(lapply(tmp, function(x) paste0("<tr'>", x, "</tr>")))),
+  noquote("</table>")
+  )
+  )
+}
+
+summary.table <- sapply(load.data, summary.func) %>%
+  round(2) %>%
+  as.data.frame() %>%
+  mutate(Description = rownames(.)) %>%
+  select(Description, everything())
+
+des.table <- data.frame(
+  a = c("Unit", "Source"),
+  b = c("$", "<a href=https://www.eia.gov/>EIA</a>"),
+  c = c(" ", " "),
+  d = c(" ", " "),
+  e= c("% point", "<a href=https://ferc.gov/>FERC</a> (text)"),
+  f = c("% point", "<a href=https://ferc.gov/>FERC</a> (text)"),
+  g = c("% point", "<a href=https://ferc.gov/>FERC</a> (text)"),
+  h = c(" ", " ")
+)
+
+colnames(summary.table) <- c("  ", "Prices", "RPS", "Deregulation",
+                             "Freq. of Order", "Freq. of Renewable",
+                             "Context; Renewable", "Temperature")
+
+colnames(des.table) <-  c("  ", "Prices", "RPS", "Deregulation",
+                             "Freq. of Order", "Freq. of Renewable",
+                             "Context; Renewable", "Temperature")
+
+summary.table %<>%
+  rbind(des.table)
+
+tablecode(summary.table, tabletype = "minimal")
+```
+<br><br><br><br>
+<small style="font-size:0.5em;"> <b>Note:</b> CSS sourced from <a href="https://github.com/psych-git/psych-git.github.io">psych-git</a></small>
 
 
+--- &vertical
 
+## Results
+ <br>
 
+--- &vertical
+
+## Discussion
+<br>
+
+<script type="text/javascript">
+  Reveal.configure({ slideNumber: true });
+</script>
