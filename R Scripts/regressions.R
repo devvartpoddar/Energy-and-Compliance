@@ -26,12 +26,13 @@ for (x in months) {
 # Modeling regressions
 # Defining the variables to be used
 col.names <- colnames(prices.data)
-var.names <- paste(c("RPS", "order.ave",
+var.names <- paste(c("RPS", "renewable.ave", "year",
   grep("dmonth", col.names, value = T)), collapse = " + ")
 
 formula.call <- as.formula(paste("log.prices ~", var.names))
 
-ols.reg <- lm(formula.call, data = prices.data)
+# ols.reg <- lm(formula.call, data = prices.data)
+# table(prices.data$context_30)
 
 fe.reg <- plm(formula.call, data = prices.data,
     index = c("State", "time"), model = "within")

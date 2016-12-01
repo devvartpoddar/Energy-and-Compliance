@@ -49,24 +49,7 @@ deregulation.data <- import("Input/processed/dereg.csv") %>%
 deregulation.data$eyear[is.na(deregulation.data$eyear)] <- 9999
 
 # Importing text data
-text.data <- import("Input/processed/text-words.csv") %>%
-  group_by(year) %>%
-  mutate(
-    renewable.ave = renewable / total,
-    pollution.ave = pollution / total,
-    order.ave = order / total
-    ) %>%
-  dplyr::summarize(
-    count = n(),
-    order = mean(order),
-    renewable = mean(renewable),
-    pollution = mean(pollution),
-    order.ave = mean(order.ave),
-    renewable.ave = mean(renewable.ave),
-    pollution.ave = mean(pollution.ave),
-    total = mean(total)
-    ) %>%
-  ungroup()
+text.data <- import("Input/processed/text-words.csv")
 
 # Merging EIA and RPS
 final.data <- merge(EIA.data, rps.data, by = "State", all = T) %>%
