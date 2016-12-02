@@ -367,14 +367,14 @@ reg.coef <- function() {
     ungroup()
 
     months <- unique(reg.data$month)
-    
+
     # Generating monthly dummy variables
     for (x in months) {
         if (x == 1) {next}
         colname <- paste0("dmonth_", x)
         reg.data[[colname]] <-  ifelse(reg.data$month == x, 1, 0)
     }
-  
+
     # Creating function to extract coefs
   coef.extract <- function(var.names, model, data = reg.data) {
       formula.call <- as.formula(paste("log.prices ~", var.names))
@@ -395,7 +395,7 @@ reg.coef <- function() {
 
       return(coef.table)
   }
-  
+
   # Creating function to run models seperately
   model.fun <- function(variable = "order.ave") {
       # Running Base fe
@@ -411,7 +411,7 @@ reg.coef <- function() {
   month.fe <- coef.extract(var.names, "Month FEs")
 
   # Running FE with median corrected context and order
-  
+
   reg.data$renewable.ave[is.na(reg.data$renewable.ave)] <- median(reg.data$renewable.ave, na.rm = T)
   reg.data$order.ave[is.na(reg.data$order.ave)] <- median(reg.data$order.ave, na.rm = T)
   reg.data$context_30[is.na(reg.data$context_30)] <- median(reg.data$context_30, na.rm = T)
@@ -422,14 +422,14 @@ reg.coef <- function() {
 
     return(final.table)
   }
-  
+
   order.model <- model.fun()
   renewable.model <- model.fun("renewable.ave")
   RPS.model <- model.fun("RPS")
   final.model <- model.fun("context_30") %>% rbind(order.model, renewable.model, RPS.model)
-  
+
   return(final.model)
-  
+
 }
 
 reg.table <- reg.coef()
@@ -444,15 +444,20 @@ reg.table %<>%
   ) %>%
   transform(model = as.factor(model))
 ```
-``` {r plotresults, echo = FALSE, message = FALSE, fig.align = "center"}
-ggplot(reg.table) +
-  geom_bar(aes(model, coef), stat = "identity", fill = "#002A42") +
-  facet_wrap(~variable) +
-  theme_bw() +
-  theme(
-    legend.position = "none"
-  )
-```
+
+<div class="">
+  ``` {r plotresults, echo = FALSE, message = FALSE, fig.align = "center"}
+  ggplot(reg.table) +
+    geom_bar(aes(model, coef), stat = "identity", fill = "#002A42") +
+    facet_wrap(~variable) +
+    labs(y  = "Coefficients", x = "Models" ) +
+    theme_bw() +
+    theme(
+      legend.position = "none"
+    )
+  ```
+</div>
+
 
 --- &vertical
 
@@ -462,7 +467,7 @@ ggplot(reg.table) +
 <ul style="list-style-type:square" class="wrapper">
   <li>
     <small>
-      <b>2SLS Regression: A key step would be to undertake a 2 stage regression; impact of federal rulings on the probability of implementing the RPS policy</b>   
+      <b>2SLS Regression: </b> A key step would be to undertake a 2 stage regression; impact of federal rulings on the probability of implementing the RPS policy
     </small>
   </li>
   <br>
@@ -474,7 +479,7 @@ ggplot(reg.table) +
   <br>
   <li class="fragment">
     <small>
-      Finally we look at only federal rulings due to easier data availablity and collection. However it would be important to look at state level policies as well in future studies. 
+      Finally we look at only federal rulings due to easier data availablity and collection. However it would be important to look at state level policies as well in future studies.
     </small>
   </li>
 </ul>
@@ -483,4 +488,3 @@ ggplot(reg.table) +
 
 <br> <br><br><br><br><br><br>
 ## Thanks!
-

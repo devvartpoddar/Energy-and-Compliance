@@ -173,7 +173,11 @@ knit        : slidify::knit2slides
  <br>
 
 
-<img src="assets/fig/plotresults-1.png" title="plot of chunk plotresults" alt="plot of chunk plotresults" style="display: block; margin: auto;" />
+
+<div class="">
+  <img src="assets/fig/plotresults-1.png" title="plot of chunk plotresults" alt="plot of chunk plotresults" style="display: block; margin: auto;" />
+</div>
+
 
 --- &vertical
 
@@ -183,7 +187,7 @@ knit        : slidify::knit2slides
 <ul style="list-style-type:square" class="wrapper">
   <li>
     <small>
-      <b>2SLS Regression: A key step would be to undertake a 2 stage regression; impact of federal rulings on the probability of implementing the RPS policy</b>   
+      <b>2SLS Regression: A key step would be to undertake a 2 stage regression; impact of federal rulings on the probability of implementing the RPS policy</b>
     </small>
   </li>
   <br>
@@ -195,7 +199,7 @@ knit        : slidify::knit2slides
   <br>
   <li class="fragment">
     <small>
-      Finally we look at only federal rulings due to easier data availablity and collection. However it would be important to look at state level policies as well in future studies. 
+      Finally we look at only federal rulings due to easier data availablity and collection. However it would be important to look at state level policies as well in future studies.
     </small>
   </li>
 </ul>
@@ -204,4 +208,3 @@ knit        : slidify::knit2slides
 
 <br> <br><br><br><br><br><br>
 ## Thanks!
-
