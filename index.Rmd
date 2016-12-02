@@ -377,7 +377,7 @@ reg.coef <- function() {
   
     # Creating function to extract coefs
   coef.extract <- function(var.names, model, data = reg.data) {
-      formula.call <- as.formula(paste("Prices ~", var.names))
+      formula.call <- as.formula(paste("log.prices ~", var.names))
 
       fe.reg <- plm(formula.call, data = data,
         index = c("State", "time"), model = "within") %>%
@@ -387,7 +387,7 @@ reg.coef <- function() {
       as.data.frame() %>%
       mutate(variable = rownames(.),
              model = model) %>%
-      filter(grepl("RPS|order.ave|context_30", variable)) %>%
+      filter(grepl("RPS|order.ave|context_30|renewable.ave", variable)) %>%
       select(model, variable, everything())
 
     coef.table <- coef.table[, 1:4]
@@ -400,49 +400,87 @@ reg.coef <- function() {
   model.fun <- function(variable = "order.ave") {
       # Running Base fe
   col.names <- colnames(reg.data)
-  var.names <- paste(c("RPS", variable, "party", "temperature"), collapse = " + ")
+  var.names <- paste(c(variable, "party", "temperature"), collapse = " + ")
 
   base <- coef.extract(var.names, "Base FE")
 
   # Running Fe with Dummies for months
-  var.names <- paste(c("RPS", variable, "party", "temperature",
+  var.names <- paste(c(variable, "party", "temperature",
                        grep("dmonth", col.names, value = T), "year"), collapse = " + ")
 
   month.fe <- coef.extract(var.names, "Month FEs")
 
   # Running FE with median corrected context and order
   
+  reg.data$renewable.ave[is.na(reg.data$renewable.ave)] <- median(reg.data$renewable.ave, na.rm = T)
   reg.data$order.ave[is.na(reg.data$order.ave)] <- median(reg.data$order.ave, na.rm = T)
   reg.data$context_30[is.na(reg.data$context_30)] <- median(reg.data$context_30, na.rm = T)
 
   median.fe <- coef.extract(var.names, "Median FEs")
 
-  # Running with yearly data instead of monthly
-    var.names <- paste(c("RPS", variable, "Electric", "temperature",
-                       "year"), collapse = " + ")
-
-    year.fe <- coef.extract(var.names, "Year FE", year.data)
-
-    final.table <- rbind(base, month.fe, median.fe, year.fe)
+    final.table <- rbind(base, month.fe, median.fe)
 
     return(final.table)
   }
   
   order.model <- model.fun()
-  final.model <- model.fun("context_30") %>% rbind(order.model)
+  renewable.model <- model.fun("renewable.ave")
+  RPS.model <- model.fun("RPS")
+  final.model <- model.fun("context_30") %>% rbind(order.model, renewable.model, RPS.model)
   
   return(final.model)
   
 }
 
-```
+reg.table <- reg.coef()
 
+# Generating maximum and minimum
+reg.table %<>%
+  mutate(
+    ci95_max = coef + se * 1.96,
+    ci95_min = coef - se * 1.96,
+    ci80_max = coef + se * 1.28,
+    ci80_min = coef - se * 1.28
+  ) %>%
+  transform(model = as.factor(model))
+```
+``` {r plotresults, echo = FALSE, message = FALSE, fig.align = "center"}
+ggplot(reg.table) +
+  geom_bar(aes(model, coef), stat = "identity", fill = "#002A42") +
+  facet_wrap(~variable) +
+  theme_bw() +
+  theme(
+    legend.position = "none"
+  )
+```
 
 --- &vertical
 
-## Discussion
+## Discussion and Next steps
 <br>
 
-<script type="text/javascript">
-  Reveal.configure({ slideNumber: true });
-</script>
+<ul style="list-style-type:square" class="wrapper">
+  <li>
+    <small>
+      <b>2SLS Regression: A key step would be to undertake a 2 stage regression; impact of federal rulings on the probability of implementing the RPS policy</b>   
+    </small>
+  </li>
+  <br>
+  <li class="fragment">
+    <small>
+      We also find a conradiction between state policies and federal rulings. If federal rulings on renewable energy redce electricity prices, why do RPS policies increase them?
+    </small>
+  </li>
+  <br>
+  <li class="fragment">
+    <small>
+      Finally we look at only federal rulings due to easier data availablity and collection. However it would be important to look at state level policies as well in future studies. 
+    </small>
+  </li>
+</ul>
+
+--- &vertical
+
+<br> <br><br><br><br><br><br>
+## Thanks!
+
