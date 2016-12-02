@@ -446,7 +446,9 @@ reg.table %<>%
   transform(model = as.factor(model))
 ```
 
-``` {r echo = FALSE}
+<div class = "trial">
+
+``` {r echo = FALSE, fig.align = "center", dev = "Cairo_png", fig.width = 10, fig.height = 7, dpi = 100}
 ggplot(reg.table, aes(model, coef)) +
     geom_point() +
     geom_errorbar(aes(ymin = ci95_min, ymax=ci95_max), colour = "#002A42") +
@@ -459,6 +461,8 @@ ggplot(reg.table, aes(model, coef)) +
       legend.position = "none"
     )
 ```
+
+</div>
 
 --- &vertical
 

@@ -174,7 +174,11 @@ knit        : slidify::knit2slides
 
 
 
-![plot of chunk unnamed-chunk-1](assets/fig/unnamed-chunk-1-1.png)
+<div class = "trial">
+
+<img src="assets/fig/unnamed-chunk-1-1.png" title="plot of chunk unnamed-chunk-1" alt="plot of chunk unnamed-chunk-1" style="display: block; margin: auto;" />
+
+</div>
 
 --- &vertical
 
