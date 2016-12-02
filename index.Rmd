@@ -442,22 +442,23 @@ reg.table %<>%
     ci80_max = coef + se * 1.28,
     ci80_min = coef - se * 1.28
   ) %>%
+  filter(!grepl("Median FEs", model)) %>%
   transform(model = as.factor(model))
 ```
 
-<div class="">
-  ``` {r plotresults, echo = FALSE, message = FALSE, fig.align = "center"}
-  ggplot(reg.table) +
-    geom_bar(aes(model, coef), stat = "identity", fill = "#002A42") +
-    facet_wrap(~variable) +
-    labs(y  = "Coefficients", x = "Models" ) +
+``` {r echo = FALSE}
+ggplot(reg.table, aes(model, coef)) +
+    geom_point() +
+    geom_errorbar(aes(ymin = ci95_min, ymax=ci95_max), colour = "#002A42") +
+    geom_errorbar(aes(ymin = ci80_min, ymax=ci80_max), colour = "#778899") +
+    geom_hline(aes(yintercept = 0), colour = "red", linetype = 2) +
+    facet_wrap(~variable, scales = "fixed") +
+    labs(y  = "Coefficients", x = "Models") +
     theme_bw() +
     theme(
       legend.position = "none"
     )
-  ```
-</div>
-
+```
 
 --- &vertical
 
