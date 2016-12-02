@@ -187,7 +187,7 @@ knit        : slidify::knit2slides
 <ul style="list-style-type:square" class="wrapper">
   <li>
     <small>
-      <b>2SLS Regression: A key step would be to undertake a 2 stage regression; impact of federal rulings on the probability of implementing the RPS policy</b>
+      <b>2SLS Regression: </b> A key step would be to undertake a 2 stage regression; impact of federal rulings on the probability of implementing the RPS policy
     </small>
   </li>
   <br>
