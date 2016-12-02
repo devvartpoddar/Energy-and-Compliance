@@ -4,17 +4,18 @@ subtitle    : Do federal policies reverberate in regional prices
 author      : Emma Heffernan and Devvart Poddar
 framework   : revealjs        # {io2012, html5slides, shower, dzslides, ...}
 revealjs    :
- transition: linear
+ transition: convex
  center: "false"
 highlighter : highlight.js  # {highlight.js, prettify, highlight}
 widgets     : [mathjax]            # {mathjax, quiz, bootstrap}
 mode        : selfcontained # {standalone, draft}
 knit        : slidify::knit2slides
---- .bg
+---
 
 <!-- Loading Required packages -->
 ``` {r loadpackages, echo = FALSE, results = "hide", message=FALSE, warning=FALSE}
-load <- c("dplyr", "magrittr", "ggplot2", "plm", "rio", "slidify", "slidifyLibraries", "lubridate", "gganimate", "tm", "koRpus", "stringi")
+load <- c("dplyr", "magrittr", "ggplot2", "plm", "rio", "slidify", "slidifyLibraries", "lubridate", "gganimate", "tm", "koRpus", "stringi",
+          "broom")
 
 lapply(load, require, character.only = T)
 ```
@@ -30,7 +31,7 @@ lapply(load, require, character.only = T)
 
 <small>Emma Heffernan & Devvart Poddar</small>
 
----
+--- &vertical
 
 ## Introduction
 <br>
@@ -47,7 +48,7 @@ lapply(load, require, character.only = T)
   <li class="fragment">
     <small>
       Much of the blame for rising electricity prices has been levied against government
-      renewable energy policies
+      renewable energy policies. Past reserach has found a link between renewable energy policies and increased energy prices.
     </small>
   </li>
   <br>
@@ -55,18 +56,26 @@ lapply(load, require, character.only = T)
     <small>
       We argue that as the federal energy court gives more legitimacy to renewable
       energy policies and goals, this increased legitimacy will result in the implementation
-      of more renewable energy policies in states.
+      of more renewable energy policies in states and thereby marking up the price.
     </small>
   </li>
 </ul>
 
---- &vertical
+
+***
 
 ## Theoretical Framework
 <br>
 
 <ul style="list-style-type:square" class="wrapper">
   <li>
+    <small>
+      Previous studies have focused exclusively on either state level policies or national enforcement to
+      explain changes in prices, without considering the interactions between the two.
+    </small>
+  </li>
+  <br>
+  <li class="fragment">
     <small>
       Robert Putnam (1988): <b>Two-level games</b>. Theorises the concept of reverberation; <i>"lnternational pressures can
       reverberate within domestic politics”</i>  subsequently altering the
@@ -77,12 +86,6 @@ lapply(load, require, character.only = T)
   <li class="fragment">
     <small>
       We will use a modified version of this theory to model how the federal and state spheres interact in the United States
-    </small>
-  </li>
-  <br>
-  <li class="fragment">
-    <small>
-      ADD IMAGE HERE
     </small>
   </li>
 </ul>
@@ -103,7 +106,7 @@ lapply(load, require, character.only = T)
   <li class="fragment">
     <small>
       We use the presence of Renewable Portfolio Standards (RPS) using data from <thead>
-      study by <b>WHO AGAIN</b>?
+      study by Hongbo Wang (2014)
       </thead>
     </small>
   </li>
@@ -127,22 +130,35 @@ prices.data <- import("./Output/processed data/mergeddata.csv") %>%
   group_by(time) %>%
   summarise(mean = mean(Prices)) %>%
   mutate(year = year(time)) %>%
+  inflate(center = unique(.$year)) %>%
+  mutate(dist = abs(year - center)) %>%
+  filter(rank(dist) / n() <= 0.25) %>%
+  mutate(weight = (1 - (dist / max(dist))^3)^3) %>%
+  arrange(time) %>%
   as.data.frame()
 ```
-``` {r plottrend, echo = FALSE, fig.align='center', fig.show="animate", interval=0.3, warning = FALSE, cache = 2, out.width="", message=FALSE}
-p <- ggplot(prices.data) +
-  geom_line(aes(time, mean, group = 1, frame = year, cumulative = T)) +
-  labs(y = "Electricity Prices", title = "Year; ") +
-  scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
-  scale_y_continuous(breaks = 7:13) +
-  theme_bw() +
-  theme(
-    axis.title.x = element_blank()
-  )
+<div class="">
 
-gg_animate(p)
+  ``` {r plottrend, echo = FALSE, fig.align='center', fig.show="animate", interval=0.5, warning = FALSE, cache = 2, out.width="", message=FALSE}
+  p <- ggplot(prices.data, aes(time, mean)) +
+    geom_point(aes(alpha = weight, group = center, frame = center)) +
+    geom_line(aes(group = 1, frame = center, cumulative = T), colour = "#002A42") +
+    labs(y = "Electricity Prices", title = "Year; ") +
+    scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
+    scale_y_continuous(breaks = 7:13) +
+    theme_bw() +
+    theme(
+      axis.title.x = element_blank(),
+      legend.position = "none"
+    )
 
-```
+  gg_animate(p)
+
+  ```
+
+</div>
+
+
 
 ***
 
@@ -289,7 +305,7 @@ tablecode <- function(df, tabletype="gridtable"){
   cat(
   c(
   noquote(paste0("<table id='", tabletype,"' style='width:100% text-align:center;'> ")),
-  noquote(paste0("<tr>", paste0("<th>", sprintf("%s",colnames(df)), "</th>", collapse=" "), "</tr>")),
+  noquote(paste0("<tr>", paste0("<th style='text-align:center'>", sprintf("%s",colnames(df)), "</th>", collapse=" "), "</tr>")),
   noquote(unlist(lapply(tmp, function(x) paste0("<tr'>", x, "</tr>")))),
   noquote("</table>")
   )
@@ -305,12 +321,12 @@ summary.table <- sapply(load.data, summary.func) %>%
 des.table <- data.frame(
   a = c("Unit", "Source"),
   b = c("$", "<a href=https://www.eia.gov/>EIA</a>"),
-  c = c(" ", " "),
-  d = c(" ", " "),
-  e= c("% point", "<a href=https://ferc.gov/>FERC</a> (text)"),
-  f = c("% point", "<a href=https://ferc.gov/>FERC</a> (text)"),
-  g = c("% point", "<a href=https://ferc.gov/>FERC</a> (text)"),
-  h = c(" ", " ")
+  c = c("-", "<a href=https://mpra.ub.uni-muenchen.de/59165/1/MPRA_paper_59165.pdf>Wang (2014)</a>"),
+  d = c("-", "<a href=http://www.electricchoice.com/map-deregulated-energy-markets>electricchoice.com</a>"),
+  e= c("% point", "<a href=https://ferc.gov/>FERC</a> (PDFs)"),
+  f = c("% point", "<a href=https://ferc.gov/>FERC</a> (PDFs)"),
+  g = c("% point", "<a href=https://ferc.gov/>FERC</a> (PDFs)"),
+  h = c("&#x2109", "<a href=https://www.ncdc.noaa.gov/>NOAA</a>")
 )
 
 colnames(summary.table) <- c("  ", "Prices", "RPS", "Deregulation",
@@ -334,6 +350,93 @@ tablecode(summary.table, tabletype = "minimal")
 
 ## Results
  <br>
+
+``` {r regressiontable, echo = FALSE, message = FALSE, warning = FALSE}
+reg.coef <- function() {
+   # Importing Data
+  reg.data <- import("Output/processed data/mergeddata.csv") %>%
+  mutate(time = ymd(paste0(year, "-", month, "-01")),
+    log.prices = log(Prices),
+    order.ave = 100 * order.ave,
+    renewable.ave = 100 * renewable.ave,
+    context_30 = context_30 * 100) %>%
+    arrange(State, year, month) %>%
+    group_by(State) %>%
+    mutate(lag.log.prices = lag(log.prices),
+      lag.prices = lag(Prices)) %>%
+    ungroup()
+
+    months <- unique(reg.data$month)
+    
+    # Generating monthly dummy variables
+    for (x in months) {
+        if (x == 1) {next}
+        colname <- paste0("dmonth_", x)
+        reg.data[[colname]] <-  ifelse(reg.data$month == x, 1, 0)
+    }
+  
+    # Creating function to extract coefs
+  coef.extract <- function(var.names, model, data = reg.data) {
+      formula.call <- as.formula(paste("Prices ~", var.names))
+
+      fe.reg <- plm(formula.call, data = data,
+        index = c("State", "time"), model = "within") %>%
+        summary()
+
+    coef.table <- fe.reg[["coefficients"]] %>%
+      as.data.frame() %>%
+      mutate(variable = rownames(.),
+             model = model) %>%
+      filter(grepl("RPS|order.ave|context_30", variable)) %>%
+      select(model, variable, everything())
+
+    coef.table <- coef.table[, 1:4]
+    colnames(coef.table)[3:4] <- c("coef", "se")
+
+      return(coef.table)
+  }
+  
+  # Creating function to run models seperately
+  model.fun <- function(variable = "order.ave") {
+      # Running Base fe
+  col.names <- colnames(reg.data)
+  var.names <- paste(c("RPS", variable, "party", "temperature"), collapse = " + ")
+
+  base <- coef.extract(var.names, "Base FE")
+
+  # Running Fe with Dummies for months
+  var.names <- paste(c("RPS", variable, "party", "temperature",
+                       grep("dmonth", col.names, value = T), "year"), collapse = " + ")
+
+  month.fe <- coef.extract(var.names, "Month FEs")
+
+  # Running FE with median corrected context and order
+  
+  reg.data$order.ave[is.na(reg.data$order.ave)] <- median(reg.data$order.ave, na.rm = T)
+  reg.data$context_30[is.na(reg.data$context_30)] <- median(reg.data$context_30, na.rm = T)
+
+  median.fe <- coef.extract(var.names, "Median FEs")
+
+  # Running with yearly data instead of monthly
+    var.names <- paste(c("RPS", variable, "Electric", "temperature",
+                       "year"), collapse = " + ")
+
+    year.fe <- coef.extract(var.names, "Year FE", year.data)
+
+    final.table <- rbind(base, month.fe, median.fe, year.fe)
+
+    return(final.table)
+  }
+  
+  order.model <- model.fun()
+  final.model <- model.fun("context_30") %>% rbind(order.model)
+  
+  return(final.model)
+  
+}
+
+```
+
 
 --- &vertical
 

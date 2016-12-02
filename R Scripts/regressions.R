@@ -26,7 +26,7 @@ for (x in months) {
 # Modeling regressions
 # Defining the variables to be used
 col.names <- colnames(prices.data)
-var.names <- paste(c("RPS", "pollution.ave", "year", "party",
+var.names <- paste(c("RPS", "order.ave", "context_30", "year", "party", "Electric",
   grep("dmonth", col.names, value = T)), collapse = " + ")
 
 formula.call <- as.formula(paste("Prices ~", var.names))
