@@ -1,0 +1,7 @@
+,Prices,RPS,Deregulation,Freq. of Order,Freq. of Renewable,Context; Renewable,Temperature
+Mean,10.73,0.43,0.33,1.52,0.15,0.11,91.97
+Median,10.16,0,0,1.41,0.08,0.08,89.5
+Min,4.95,0,0,0.11,0.01,0,2
+Max,23.08,1,1,2.51,0.42,0.31,185
+Unit,$,-,-,% point,% point,% point,℉
+Source,EIA,Wang (2016),electricchoice.com,FERC (PDFs),FERC (PDFs),FERC (PDFs),NOAA
