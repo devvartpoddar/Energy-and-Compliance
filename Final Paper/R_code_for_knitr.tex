@@ -1,0 +1,607 @@
+\documentclass[twoside]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+  \newcommand{\euro}{€}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\PassOptionsToPackage{usenames,dvipsnames}{color} % color is loaded by hyperref
+\hypersetup{unicode=true,
+            pdftitle={Policy Reverberation and Electricity Prices in the United States},
+            pdfauthor={Emma Heffernan \& Devvart Poddar},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{natbib}
+\bibliographystyle{plainnat}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{{#1}}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{{#1}}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{{#1}}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{{#1}}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{{#1}}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{{#1}}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{{#1}}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{{#1}}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{{#1}}}
+\newcommand{\ImportTok}[1]{{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{{#1}}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{{#1}}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{{#1}}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{{#1}}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{{#1}}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{{#1}}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{{#1}}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{{#1}}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{{#1}}}}
+\newcommand{\BuiltInTok}[1]{{#1}}
+\newcommand{\ExtensionTok}[1]{{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{{#1}}}
+\newcommand{\RegionMarkerTok}[1]{{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{{#1}}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{{#1}}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{{#1}}}}
+\newcommand{\NormalTok}[1]{{#1}}
+\usepackage{longtable,booktabs}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+  \title{Policy Reverberation and Electricity Prices in the United States}
+  \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+  \author{Emma Heffernan \& Devvart Poddar}
+  \preauthor{\centering\large\emph}
+  \postauthor{\par}
+  \predate{\centering\large\emph}
+  \postdate{\par}
+  \date{December 14, 2016}
+
+
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+\hypersetup{colorlinks=true, citecolor=blue, linkcolor=black}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead[OL,ER]{\large Policy Reverberation and Electricity Prices in the United States}
+\fancyhead[EL,OR]{\thepage}
+\fancyfoot[L]{\small Emma Heffernan \& Devvart Poddar}
+\fancyfoot[R]{\small Hertie School of Governance}
+\fancyfoot[C]{}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\pagebreak
+
+\section{Introduction}\label{introduction}
+
+Rising electricity costs in developed nations has become the political
+topic du jour across OECD jurisdictions. The cost of electricity
+matters: the impact of rising electricity costs is felt most acutely by
+low-income individuals, who see a greater proportion of their pay checks
+directed towards their electricity bills. Given the economic
+difficulties caused by rising electricity prices, this is an ongoing
+topic of importance for academics and politicians alike.
+
+Much of the blame for rising electricity prices has been levied against
+government renewable energy policies
+\citep[see][]{Ferguson2016, Lynch2016, Svaldi2016}. This perspective
+claims that the requirement that electricity generation is made up of
+more expensive renewable energy production will lead to higher costs.
+Indeed, as the U.S. Energy Information Administrative (EIA) claims that
+generation is responsible for 65\% of average electricity prices,
+distribution accounts for 25\% of average electricity prices, and
+transmission accounts for 9\% of electricity prices \citep{EIA2015}, a
+rise in the cost of generating electricity may lead to increased prices.
+Indeed, Hongbo Wang \citep{Wang2016} has found a relationship between
+the first enactment of particular renewable energy policies and rising
+energy costs.
+
+The question that is left unanswered here is why there is a divergence
+between states that have implemented renewable energy policies (knowing
+that it may lead to increased electricity cost) and those that have not.
+In part, this gap in the literature is because much research has been
+limited to the impact of state level policies on electricity prices,
+either through process-tracing extreme case studies
+\citep[see][]{Netherlands2013} or by analyzing the relationship between
+cost and policy at the state level \citep[see][]{Wang2016}. These
+research efforts are invaluable; they provide an understanding of how
+outliers have implemented renewable energy policies, and of general
+trends assuming monolithic political contexts. However, this paper will
+attempt to answer the question of what happens to renewable energy
+policy, and subsequently electricity costs, when political environments
+change. To address this question, this paper will conduct a textual
+analysis of federal energy court rulings. Specifically, it will analyze
+whether changes in the environmental language used in the rulings of the
+federal energy courts is correlated with an increased electricity costs
+at the state level. The United States is the case study in this analysis
+because federal judicial rulings effects multiple different contexts.
+This ``most different systems design'' enables us to analyze whether
+changes in judicial opinion lead to changes in renewable energy policies
+and in electricity prices.
+
+\section{Literature Review: Two-Level Games, Renewable Energy Policies,
+and Electricity
+Prices}\label{literature-review-two-level-games-renewable-energy-policies-and-electricity-prices}
+
+\subsection{Theoretical Framework: Two-Level
+Games}\label{theoretical-framework-two-level-games}
+
+The literature that concentrates solely on the link between state
+renewable energy policies and cost ignores any impact that federal body
+positions on renewable energy would have on state-level policy. This
+assumption follows the realist trajectory. Traditional realist scholars
+argue that there is no connection between judicial court rhetoric and
+state-level action because the rhetoric is epiphenomenal
+\citep{Mearsheimer1994} and governments enact renewable energy policies
+when it suits their best interests \citep{Downs1996}. Thus, the realist
+academic scholarship emphasizes that federal court-level rhetoric has no
+concrete impact on the renewable policies of states. Further, a realist
+would argue that if a state?s policies are in line with federal rulings,
+it is primarily due to the self-interest of the state \citep{Waltz1979}.
+As such, even in a situation where a state did adhere to the policies of
+a treaty, the fact that a state did so is not because of any relevant
+federal rhetoric.
+
+On the other side of the ideological spectrum, constructivists argue
+that states do try to adhere to ideological rhetoric. Constructivists
+would argue that pressure from NGOs and politicians can alter the way
+that states approach renewable policy \citep{Finnemore1996}. Finally, a
+third perspective would argue that the reason why states implement
+renewable energy policy is because of local pressure and local support
+for specific policies. In this understanding, political institutions,
+interest groups, and state actors determine whether a government
+implements renewable energy policy \citep{Hafner2005}. Thus, whether
+states actually comply depends on a more localized mobilization.
+
+Clearly these three mainstream arguments point in different directions.
+One maintains that federal court rhetoric has no effect on a states
+renewable energy, while the other argues that the socialization that can
+result from federal court decisions can result in a states changed
+renewable energy policies. The third maintains that the federal court is
+irrelevant, and that the renewable energy policies of states governments
+result from local pressure. However, all three of these perspectives
+have an incomplete focus. The way the three theories arrive at their
+arguments is centred on a state-centric response to specific pressures.
+Both constructivist and realist theories overlook the impact of domestic
+civil society in either the deterioration or amelioration of a states
+renewable energy policies \citep{Hafner2005}. The third perspective,
+however, cannot explain why states implement renewable energy policies
+in the absence of domestic mobilization. As such, all three theories
+overlook a pertinent arena (whether state-centric or federal) that
+impacts the implementation of renewable energy policies in specific
+states.
+
+Due to the limitations of these perspectives, this paper will follow a
+theoretical framework that emphasizes the necessity of considering both
+federal and state-centered influences on a states domestic policies.
+This theoretical framework comes from Robert Putnam \citep{Putnam1988}s
+concept of a two-level game. Putnam argues that politicians consider
+both international and domestic dynamics in the formulation of
+international agreements. Putnams focus intentionally deviates from
+state-centric theories, which he argues are an uncertain foundation for
+theorizing how domestic and international politics interact \citep[
+p.433]{Putnam1988}. He further theorizes a concept of reverberation.
+Putnam argues that \emph{international pressures can reverberate within
+domestic politics} subsequently altering the position of domestic civic
+society groups \citep[ p.454]{Putnam1988}. Building on the significance
+of reverberation, Putnam argues that if the two spheres are linked
+synergistically then they cannot be modeled separately \citep[
+p.456]{Putnam1988}. Thus, the incompleteness of the aforementioned
+theories is because they are attempting to model the influence of one
+sphere in absence of a discussion of the impact of the other sphere. We
+will use a modified version of this theory to model how the federal and
+state spheres interact in the United States. Putnams theory illustrates
+how the impact of federal court decisions can reverberate, and
+potentially influence, the attitudes of the state legislature
+
+\subsection{The Formulation of Energy Policy in the United
+States}\label{the-formulation-of-energy-policy-in-the-united-states}
+
+There are two court systems that ensure that electricity companies
+comply with either the federal or government policies. The first court
+system is the Federal Energy Regulatory Commission (FERC). FERC is an
+independent regulatory agency within the United States Department of
+Energy. Specifically, FERC regulates the transmission of electricity in
+interstate commerce, and licenses non-federal hydropower projects. Their
+jurisdiction also includes overseeing the transmission and wholesale
+sales of electricity in interstate commerce, reviewing the siting
+applications for electric transmission projects, reviewing mergers and
+acquisitions by electricity companies, licenses and inspects private,
+municipal, and state hydroelectric projects, and overseeing
+environmental matters related to natural gas and hydroelectricity
+projects \citep{FERC2016}. In contrast, the state-level adjudicative
+bodies are responsible for the public utilities in the separate states.
+State-level bodies are primarily concerned with regulating retail
+electricity sales to customers, overseeing the construction of oil
+pipelines, and regulation of activities of the municipal power systems
+and most rural electric cooperatives \citep{FERC2016}.
+
+These courts are guided by policies made at the state and federal level
+regarding electricity generation and distribution. Energy policy in the
+United States is formulated at both the federal and the state level.
+Federal level policies tend to be more financially based, and rely
+primarily on Tax Credits and Cost Recovery Systems. In contrast, state
+level policies can take a wide variety of forms including
+feed-in-tariffs, and renewable energy requirements \citep{FERC2016}.
+Hence, it is at the state level that there is significant divergence in
+policy as all states are subject to the overarching policies made at the
+federal level (and, in tandem, all rulings that are made by FERC).
+
+\subsubsection{Renewable Energy Policies, and Associated
+Costs}\label{renewable-energy-policies-and-associated-costs}
+
+Non-hydro renewable electricity production accounts for 2\% of total
+electricity production in the United States; fossil fuels used for
+electricity generation account for 40\% of all carbon dioxide emissions
+resulting from human activity in the United States \citep{EIA2015}. The
+overwhelming amount of carbon dioxide produced by electricity production
+has prompted multiple states to encourage the increase of renewable
+energy production feeding into the electricity grid through renewable
+energy promotion policies \citep{Wang2016}.
+
+Renewable energy promotion policies are separated in the literature into
+two broad policies realms: market-pull policies and technological-push
+policies. Market-pull policies aim at \emph{increasing renewable energy
+use by creating demand for Renewable Energy Targets (RETs)}
+\citep[p.~16]{EIA2015}. These policies include carbon taxation
+strategies, technology and performance standards, and investment
+promotion. Technology-push policies include public R\&D spending, tax
+credits, and support for education and training. This paper will focus
+specifically on market-pull policies that incentivize the generation of
+renewable energy. There are two types of policies that incentivize the
+use of renewable energy generation in the electricity grid. The first is
+a market-based construction of generation incentives, and the second is
+generation promotion policies. These policies are summarized in the
+following table.
+
+\begin{longtable}[c]{@{}lll@{}}
+\toprule
+Policy & Price.Driven & Quantity.Driven\tabularnewline
+\midrule
+\endhead
+Generation Incentives & Feed-in tariffs & Tendering systems for long
+term contracts Energy\tabularnewline
+& Premium feed-in tariffs & Portfolio standards (quotas)\tabularnewline
+Generation Promotion & Green Tariffs &\tabularnewline
+\bottomrule
+\end{longtable}
+
+\subsubsection{Energy Portfolio standards
+(quotas)}\label{energy-portfolio-standards-quotas}
+
+In the United States, 29 states have implemented mandatory Renewable
+Portfolio Standards (RPS), and a further 8 states have adopted
+non-binding goals for renewable energy standards \citep{Wang2016}. These
+states place an obligation on electricity supply companies to produce a
+specific faction of their electricity from renewable sources. Though it
+has been argued that RPS policies increase the amount of renewable
+energy generation in a state \citep{Carley2009} critics argue that RPS
+increases retail electricity prices because of the required extra
+investment or costs involved with a switch to using renewable energy
+\citep{Lesser2013}.
+
+Previous studies of RPS policy effects have focused on evaluating
+whether the implementation of policies leads to forecasted changes in
+electricity costs either at the national level or the state level
+\citep[see][]{PalmarBurtraw2005, Kydes2007, Wang2016}. Notably, Hongbo
+Wang (2016) uses a differences-in-differences model to compare the
+electricity prices of those states that have not implemented RPS to the
+electricity prices of those states that have implemented RPS, and found
+that implementation increases electricity prices when the RPS policy
+first becomes binding. Her argument is persuasive, both in terms of the
+evidence and methodology used. We want to expand on this argument by
+asking why particular states have chosen to implement renewable energy
+policies if they had the understanding that it may increase costs. We
+will link the implementation of renewable energy policy to the
+reverberation effects of particular voting patterns, and to the rhetoric
+used by federal energy courts.
+
+\subsubsection{Feed-in Tariffs, Tendering systems and Green
+Tariffs}\label{feed-in-tariffs-tendering-systems-and-green-tariffs}
+
+Despite the wide international use of FITS, the utilization of feed-in
+tariffs have not been popular in the United States at the state level.
+Currently, there are five states that have mandated FITs by law or
+regulation, and a handful of states have voluntary FIT programs
+\citep{EIA2013}. Given the lack of variation at the state level for this
+policy in the United States, this policy will not be the main policy of
+investigation.
+
+In the United States, the use of tendering systems for long-term
+contracts and green tariffs are not an independent policy measure in and
+of themselves. Rather, companies can choose to engage in long-term
+contracts or green tariffs in order to ensure that they meet the
+requirements set out by other policies \citep{Hong2015}.
+
+\section{Methodology}\label{methodology}
+
+The most different systems design evaluates whether states that are
+different in as many factors as possible have a similar dependent
+variable of interest because of a change in the dependent variable. For
+our analysis, the dependent variable is electricity pricing and the
+implementation of RPS policies at the state level. We wonder if changes
+in judicial rhetoric at the federal level impacts these two variables.
+
+However, our states are different in many ways. Thus, we must control
+for several variables to ensure that we are not overemphasizing the
+impact of judicial rhetoric on electricity prices and RPS policy. For
+example, variables such as political leanings, or whether the state
+votes democrat or republican, may be correlated with different odds of
+implementing RPS policies. Further, weather patterns, such as
+particularly hot summers, may make electricity more expensive because of
+increased demand. Finally, electricity market deregulation may impact
+electricity prices regardless of whether the state has engaged in RPS
+policies. These variables and their data sources are specified in the
+following table:
+
+\subsection{Variable Snapshot}\label{variable-snapshot}
+
+\begin{longtable}[c]{@{}llllllll@{}}
+\toprule
+X & Prices & RPS & Deregulation & Freq..of.Order & Freq..of.Renewable &
+Context..Renewable & Temperature\tabularnewline
+\midrule
+\endhead
+Mean & 10.73 & 0.43 & 0.33 & 1.52 & 0.15 & 0.11 & 91.97\tabularnewline
+Median & 10.16 & 0 & 0 & 1.41 & 0.08 & 0.08 & 89.5\tabularnewline
+Min & 4.95 & 0 & 0 & 0.11 & 0.01 & 0 & 2\tabularnewline
+Max & 23.08 & 1 & 1 & 2.51 & 0.42 & 0.31 & 185\tabularnewline
+Unit & USD & - & - & \% point & \% point & \% point &\tabularnewline
+Source & EIA & Wang (2016) & electricchoice.com & FERC (PDFs) & FERC
+(PDFs) & FERC (PDFs) & NOAA\tabularnewline
+\bottomrule
+\end{longtable}
+
+This paper relies on the assumption that reverberation of FERC decisions
+results from three intertwined variables. The first is frequency. We
+argue that the more frequently FERC uses particular terms, the more
+likely the court decisions are to reverberate in the state context. This
+is because the more a federal court makes statements about a topic, the
+more likely this topic will arguably stay in the mind of a state
+politician or state advocates. Repetition, here, is key for getting into
+the long-term memory of particular individuals.
+
+The second variable is that of renewable terminology. We argue that the
+court can choose to use particular words in order to make a ruling. The
+choice of some terms are more likely to encourage a positive association
+with the use of renewable energy policies. Hence, the terms that will be
+searched for as representative of renewable terminology are green,
+renewable, hydro, sustainable, sustain, and environment. These terms
+carry positive connotations with regards to renewable energy. The third
+variable is that of action terminology. Here, words that indicate that
+the court is ordering a particular corporation or person to take action
+are correlated with situations where the individual does not have a
+choice as to whether they will adhere to the ruling. The action terms
+that will be searched for are order, revoke, and comply.
+
+\subsection{Web-Scrapping}\label{web-scrapping}
+
+Each of the relevant variables was obtained using web scrapping. The
+variables were then matched based on year, month, and state in question.
+For variables that did not change over the course of a year, or between
+years, such as the proportion of the popular vote that went to each
+party in the relevant elections, the same numbers were applied to all
+observations until they changed. Hence, the votes for political parties
+from 2000 were counted as the same for all months in 2000, 2001, 2002,
+and 2003. Those from 2004 were counted for all months in 2004, 2005,
+2006, and 2007, and so on.
+
+\subsection{Textual Analysis}\label{textual-analysis}
+
+The text obtained from the FERC online commissioners was analyzed using
+a program called lemmatize. Lemmatize works through cleaning the text in
+three distinct ways. 1. All punctuation and numbers are removed. 2. All
+commonly used linking terms such as \emph{and }, \emph{or}, \emph{but}
+are removed. 3. All terms are reduced to their root form. For example,
+all terms such as compliance, comply, and complying would become to be
+comply. This change enabled us to search only for the term comply
+without being concerned that we were missing particular conjugations of
+the word comply in our search.
+
+\includegraphics{R_code_for_knitr_files/figure-latex/copy2-1.pdf}
+
+These electricity prices can also be broken down by month, where it is
+revealed that they tend to be lowest in the summer, and highest in the
+summer.
+
+\begin{verbatim}
+## Warning: Removed 2 rows containing missing values (geom_pointrange).
+\end{verbatim}
+
+\includegraphics{R_code_for_knitr_files/figure-latex/copy3-1.pdf}
+
+\subsection{Terminology Regression}\label{terminology-regression}
+
+The terminology regression was conducted using a Fixed Effects
+regression. The reason why the model relies on a fixed effects estimator
+is because fixed effects controls for heterogeneity between cases over
+time. We regressed the impact of terminology on prices in three ways.
+
+First, we evaluated whether there was a correlation between the
+frequency of order terminology and pricing. Second, we evaluated whether
+there was a correlation between the frequency of renewable terminology
+and pricing.
+
+However, these analyses do not account for whether there is a connection
+between the use of order terms and renewable terms. Specifically, the
+word \emph{order} could be used 50 times in a document, but that does
+not mean that it will impact the price of electricity unless it is
+correlated with the use or production of renewable energy policy. Hence,
+we created a third variable called context to measure the impact of the
+two words occurring together on electricity prices. The context variable
+counts the incidence of times that the order words and renewable words
+are used together. So, for example, if the judge uses an order word and
+uses a renewable word that within 30 words of the order word, this would
+count as one instance for our third variable. The reason why we used 30
+words as the window of distance between the terms is because the average
+sentence length if 15-25 words, and often does not exceed 35 words.
+Thus, if the order and renewable words are within 30 words of each
+other, either they are in the same sentence, or they are in adjacent
+sentences. This proximity increases the likelihood that they are used to
+relay the same judicial idea.
+
+\section{Results}\label{results}
+
+\subsection{Terminology Regression}\label{terminology-regression-1}
+
+The following chart presents the results of our analyses for the impact
+of order, renewables and context terminology on electricity pricing. It
+also includes the impact of RPS policies on electricity prices. It
+should be noted that for each regression, we have controlled for the
+other noted variables, as well as political affiliation, deregulation,
+and weather.
+
+The first regression, the bars on the left hand side, contain the
+results for the base fixed effects regression. It should be noted that
+there is a positive effect for all the variables. This implies that the
+increased frequency (terminology) or enactment of RPS policies is
+correlated with an increased price of electricity, when unobserved
+heterogeneity is controlled for. These results, and in particular the
+result that RPS policy is correlated with higher electricity prices, is
+expected based on the theoretical framework and literature review.
+
+However, as illustrated above, the prices of electricity tend to shift
+with weather patterns that occur within a year. Hence, we include a
+second regression that regresses based on month and year fixed effects.
+Curiously, this regression has notable effects on the impacts of the
+terminology and RPS variables. Specifically, both context and renewable
+variables drop to a negative effect. The frequency of these variables is
+now correlated with a decrease in the price of electricity. This means
+that as the word renewable or the appearance of both order and renewable
+words within 30 words of each other increases in frequency, the
+correlated cost of electricity goes down. This result was not predicted
+by our models, and is suggests that there must be some unspecified
+bridging variables between the implementation of renewable energy
+policies and increased electricity costs. These bridging variables could
+include companies buying into long-term contracts that lock-them in to
+more expensive renewable energy production. However, this is subject for
+future research.
+
+In contrast, order remains positively correlated with electricity prices
+(though it is just above the 0.00 coefficient). RPS policies are also
+correlated with increased electricity prices, but the impact is much
+less than the effects that have been noted in past studies.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{final <-}\StringTok{ }\KeywordTok{import}\NormalTok{(}\StringTok{"Output/processed data/mergeddata.csv"}\NormalTok{)}
+\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{subset}\NormalTok{(final, Judicial %in%}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"order.ave"}\NormalTok{, }\StringTok{"renewable.ave"}\NormalTok{, }\StringTok{"context_30"}\NormalTok{)),}
+    \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \NormalTok{judicial, }\DataTypeTok{y =} \NormalTok{price,  }\DataTypeTok{colour =} \KeywordTok{interaction}\NormalTok{(Judicial, Prices))) +}\StringTok{ }\KeywordTok{facet_wrap}\NormalTok{( ~}\StringTok{ }\NormalTok{judicial) +}\StringTok{ }\KeywordTok{stat_summary}\NormalTok{(}\DataTypeTok{fun.y=}\StringTok{"mean"}\NormalTok{)}
+    \KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{alpha =} \FloatTok{0.3}\NormalTok{, }\DataTypeTok{position =} \StringTok{"jitter"}\NormalTok{) +}
+\StringTok{    }\KeywordTok{geom_boxplot}\NormalTok{(}\DataTypeTok{alpha =} \DecValTok{0}\NormalTok{, }\DataTypeTok{colour =} \StringTok{"black"}\NormalTok{)+}
+\KeywordTok{ggtitle} \NormalTok{(}\StringTok{"Judicial Rulings and Price"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Two Step}\label{two-step}
+
+\section{Conclusion and Avenues for Further
+Research}\label{conclusion-and-avenues-for-further-research}
+
+The main finding of our analysis is that there is a pricing
+contradiction when evaluating state policies and federal rulings. This
+finding runs against the arguments in the mainstream literature that
+suggest that RPS policies increase electricity prices because the
+generation of electricity is more expensive if done through renewable
+forms. However, if federal rulings that contain terminology around
+ordering companies take specific action with regards to renewable energy
+are correlated with reduced electricity prices, it may not all be about
+the costs of electricity generation. Hence, further research would do
+well to expand on this contradiction by utilizing process-tracing
+analysis of the link between RPS and increased electricity costs in
+select states. Specifically, what about RPS is driving prices upwards?
+If it is not the cost of generating electricity, what is the economic
+impact of implementing RPS?
+
+Finally, our main judicial link here was federal court rulings. In
+short, this variable was chosen in part to evaluate reverberation
+effects, but also because of the relative ease of scrapping the data
+from the FERC website (in comparison to from the websites of 50 state
+judicial commissions). What remains to be seen, however, is whether
+increased federal court focus on renewable energy is correlated with
+increased state-level court focus on renewable energy. Further studies
+would do well to evaluate the terminology used by courts at the
+state-level, in order to analyze if there is a reverberation of federal
+court rhetoric at the state level as well.
+
+\pagebreak
+\fancyhf{}
+
+\renewcommand\refname{References}
+\bibliography{Bibtex.bib}
+
+\end{document}

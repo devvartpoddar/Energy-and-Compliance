@@ -1,14 +1,19 @@
 ---
-output: pdf_document
----
- ---
 title: "Policy Reverberation and Electricity Prices in the United States"
-author: "Emma Heffernan and Devvart Poddar"
-date: "December 12, 2016"
+author: "Emma Heffernan & Devvart Poddar"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
 output:
   pdf_document:
-	toc: true
+    citation_package: natbib
+    highlight: tango
+    keep_tex: yes
+    number_sections: yes
+    toc: yes
+    includes:
+      in_header: templates/header.tex
 bibliography: Bibtex.bib
+classoption: twoside
+csl: templates/apa.csl
 ---
 
 \pagebreak
@@ -33,9 +38,10 @@ rm(load, pkgs)
 ```
 
 # Introduction
+
 Rising electricity costs in developed nations has become the political topic du jour across OECD jurisdictions. The cost of electricity matters: the impact of rising electricity costs is felt most acutely by low-income individuals, who see a greater proportion of their pay checks directed towards their electricity bills. Given the economic difficulties caused by rising electricity prices, this is an ongoing topic of importance for academics and politicians alike.
 
-Much of the blame for rising electricity prices has been levied against government renewable energy policies [see @Ferguson2016; @Lynch2016; @Svaldi2016]. This perspective claims that the requirement that electricity generation is made up of more expensive renewable energy production will lead to higher costs. Indeed, as the U.S. Energy Information Administrative (EIA) claims that generation is responsible for 65% of average electricity prices, distribution accounts for 25% of average electricity prices, and transmission accounts for 9% of electricity prices [@EIA2015], a rise in the cost of generating electricity may lead to increased prices. Indeed, Hongbo Wang [-@Wang2016] has found a relationship between the first enactment of particular renewable energy policies and rising energy costs.
+Much of the blame for rising electricity prices has been levied against government renewable energy policies [see @Ferguson2016; @Lynch2016; @Svaldi2016]. This perspective claims that the requirement that electricity generation is made up of more expensive renewable energy production will lead to higher costs. Indeed, as the U.S. Energy Information Administrative (EIA) claims that generation is responsible for 65% of average electricity prices, distribution accounts for 25% of average electricity prices, and transmission accounts for 9% of electricity prices [@EIA2015], a rise in the cost of generating electricity may lead to increased prices. Indeed, Hongbo Wang [@Wang2016] has found a relationship between the first enactment of particular renewable energy policies and rising energy costs.
 
 The question that is left unanswered here is why there is a divergence between states that have implemented renewable energy policies (knowing that it may lead to increased electricity cost) and those that have not. In part, this gap in the literature is because much research has been limited to the impact of state level policies on electricity prices, either through process-tracing extreme case studies [see @Netherlands2013] or by analyzing the relationship between cost and policy at the state level [see @Wang2016]. These research efforts are invaluable; they provide an understanding of how outliers have implemented renewable energy policies, and of general trends assuming monolithic political contexts. However, this paper will attempt to answer the question of what happens to renewable energy policy, and subsequently electricity costs, when political environments change.  To address this question, this paper will conduct a textual analysis of federal energy court rulings. Specifically, it will analyze whether changes in the environmental language used in the rulings of the federal energy courts is correlated with an increased electricity costs at the state level. The United States is the case study in this analysis because federal judicial rulings effects multiple different contexts. This "most different systems design" enables us to analyze whether changes in judicial opinion lead to changes in renewable energy policies and in electricity prices.
 
@@ -49,7 +55,7 @@ On the other side of the ideological spectrum, constructivists argue that states
 
 Clearly these three mainstream arguments point in different directions. One maintains that federal court rhetoric has no effect on a states renewable energy, while the other argues that the socialization that can result from federal court decisions can result in a states changed renewable energy policies. The third maintains that the federal court is irrelevant, and that the renewable energy policies of states governments result from local pressure. However, all three of these perspectives have an incomplete focus. The way the three theories arrive at their arguments is centred on a state-centric response to specific pressures. Both constructivist and realist theories overlook the impact of domestic civil society in either the deterioration or amelioration of a states renewable energy policies [@Hafner2005]. The third perspective, however, cannot explain why states implement renewable energy policies in the absence of domestic mobilization. As such, all three theories overlook a pertinent arena (whether state-centric or federal) that impacts the implementation of renewable energy policies in specific states.
 
-Due to the limitations of these perspectives, this paper will follow a theoretical framework that emphasizes the necessity of considering both federal and state-centered influences on a states domestic policies. This theoretical framework comes from Robert Putnam [-@Putnam1988]s concept of a two-level game. Putnam argues that politicians consider both international and domestic dynamics in the formulation of international agreements. Putnams focus intentionally deviates from state-centric theories, which he argues are an uncertain foundation for theorizing how domestic and international politics interact [-@Putnam1988 p.433]. He further theorizes a concept of reverberation. Putnam argues that *international pressures can reverberate within domestic politics* subsequently altering the position of domestic civic society groups [-@Putnam1988 p.454]. Building on the significance of reverberation, Putnam argues that if the two spheres are linked synergistically then they cannot be modeled separately -@Putnam1988 p.456]. Thus, the incompleteness of the aforementioned theories is because they are attempting to model the influence of one sphere in absence of a discussion of the impact of the other sphere. We will use a modified version of this theory to model how the federal and state spheres interact in the United States. Putnams theory illustrates how the impact of federal court decisions can reverberate, and potentially influence, the attitudes of the state legislature
+Due to the limitations of these perspectives, this paper will follow a theoretical framework that emphasizes the necessity of considering both federal and state-centered influences on a states domestic policies. This theoretical framework comes from Robert Putnam [@Putnam1988]s concept of a two-level game. Putnam argues that politicians consider both international and domestic dynamics in the formulation of international agreements. Putnams focus intentionally deviates from state-centric theories, which he argues are an uncertain foundation for theorizing how domestic and international politics interact [@Putnam1988 p.433]. He further theorizes a concept of reverberation. Putnam argues that *international pressures can reverberate within domestic politics* subsequently altering the position of domestic civic society groups [@Putnam1988 p.454]. Building on the significance of reverberation, Putnam argues that if the two spheres are linked synergistically then they cannot be modeled separately [@Putnam1988 p.456]. Thus, the incompleteness of the aforementioned theories is because they are attempting to model the influence of one sphere in absence of a discussion of the impact of the other sphere. We will use a modified version of this theory to model how the federal and state spheres interact in the United States. Putnams theory illustrates how the impact of federal court decisions can reverberate, and potentially influence, the attitudes of the state legislature
 
 ## The Formulation of Energy Policy in the United States
 
@@ -57,43 +63,37 @@ There are two court systems that ensure that electricity companies comply with e
 
 These courts are guided by policies made at the state and federal level regarding electricity generation and distribution. Energy policy in the United States is formulated at both the federal and the state level. Federal level policies tend to be more financially based, and rely primarily on Tax Credits and Cost Recovery Systems. In contrast, state level policies can take a wide variety of forms including feed-in-tariffs, and renewable energy requirements [@FERC2016]. Hence, it is at the state level that there is significant divergence in policy as all states are subject to the overarching policies made at the federal level (and, in tandem, all rulings that are made by FERC).
 
-## Renewable Energy Policies, and Associated Costs
+### Renewable Energy Policies, and Associated Costs
 
-Non-hydro renewable electricity production accounts for 2% of total electricity production in the United States; fossil fuels used for electricity generation account for 40% of all carbon dioxide emissions resulting from human activity in the United States [@EIA2015]. The overwhelming amount of carbon dioxide produced by electricity production has prompted multiple states to encourage the increase of renewable energy production feeding into the electricity grid through renewable energy promotion policies [@Hong2016].
+Non-hydro renewable electricity production accounts for 2% of total electricity production in the United States; fossil fuels used for electricity generation account for 40% of all carbon dioxide emissions resulting from human activity in the United States [@EIA2015]. The overwhelming amount of carbon dioxide produced by electricity production has prompted multiple states to encourage the increase of renewable energy production feeding into the electricity grid through renewable energy promotion policies [@Wang2016].
 
 Renewable energy promotion policies are separated in the literature into two broad policies realms: market-pull policies and technological-push policies. Market-pull policies aim at *increasing renewable energy use by creating demand for Renewable Energy Targets (RETs)* [@EIA2015, p. 16]. These policies include carbon taxation strategies, technology and performance standards, and investment promotion. Technology-push policies include public R&D spending, tax credits, and support for education and training.
 This paper will focus specifically on market-pull policies that incentivize the generation of renewable energy. There are two types of policies that incentivize the use of renewable energy generation in the electricity grid. The first is a market-based construction of generation incentives, and the second is generation promotion policies. These policies are summarized in the following table.
-
-### Renewable Energy Policies
 
 ```{r copy, echo = FALSE}
 policies.csv <- read.csv("Input/processed/policies.csv")
 kable(policies.csv)
 ```
 
-## Feed-in Tariffs and Premium Feed-in Tariffs
+### Energy Portfolio standards (quotas)
+
+In the United States, 29 states have implemented mandatory Renewable Portfolio Standards (RPS), and a further 8 states have adopted non-binding goals for renewable energy standards [@Wang2016]. These states place an obligation on electricity supply companies to produce a specific faction of their electricity from renewable sources. Though it has been argued that RPS policies increase the amount of renewable energy generation in a state [@Carley2009] critics argue that RPS increases retail electricity prices because of the required extra investment or costs involved with a switch to using renewable energy [@Lesser2013].
+
+Previous studies of RPS policy effects have focused on evaluating whether the implementation of policies leads to forecasted changes in electricity costs either at the national level or the state level [ see @PalmarBurtraw2005; @Kydes2007; @Wang2016]. Notably, Hongbo Wang (2016) uses a differences-in-differences model to compare the electricity prices of those states that have not implemented RPS to the electricity prices of those states that have implemented RPS, and found that implementation increases electricity prices when the RPS policy first becomes binding. Her argument is persuasive, both in terms of the evidence and methodology used. We want to expand on this argument by asking why particular states have chosen to implement renewable energy policies if they had the understanding that it may increase costs. We will link the implementation of renewable energy policy to the reverberation effects of particular voting patterns, and to the rhetoric used by federal energy courts.
+
+### Feed-in Tariffs, Tendering systems and Green Tariffs
 
 Despite the wide international use of FITS, the utilization of feed-in tariffs have not been popular in the United States at the state level. Currently, there are five states that have mandated FITs by law or regulation, and a handful of states have voluntary FIT programs [@EIA2013]. Given the lack of variation at the state level for this policy in the United States, this policy will not be the main policy of investigation.
 
-## Intermediary Policies: Tendering Systems and Green Tariffs
-
 In the United States, the use of tendering systems for long-term contracts and green tariffs are not an independent policy measure in and of themselves. Rather, companies can choose to engage in long-term contracts or green tariffs in order to ensure that they meet the requirements set out by other policies [@Hong2015].
-
-## Energy Portfolio standards (quotas)
-
-In the United States, 29 states have implemented mandatory Renewable Portfolio Standards (RPS), and a further 8 states have adopted non-binding goals for renewable energy standards [@Hong2016]. These states place an obligation on electricity supply companies to produce a specific faction of their electricity from renewable sources. Though it has been argued that RPS policies increase the amount of renewable energy generation in a state [@Carley2009] critics argue that RPS increases retail electricity prices because of the required extra investment or costs involved with a switch to using renewable energy [@Lesser2013].
-
-Previous studies of RPS policy effects have focused on evaluating whether the implementation of policies leads to forecasted changes in electricity costs either at the national level or the state level [ see @PalmarBurtraw2005; @Kydes2007; @Hong2016]. Notably, Hongbo Wang (2016) uses a differences-in-differences model to compare the electricity prices of those states that have not implemented RPS to the electricity prices of those states that have implemented RPS, and found that implementation increases electricity prices when the RPS policy first becomes binding. Her argument is persuasive, both in terms of the evidence and methodology used. We want to expand on this argument by asking why particular states have chosen to implement renewable energy policies if they had the understanding that it may increase costs. We will link the implementation of renewable energy policy to the reverberation effects of particular voting patterns, and to the rhetoric used by federal energy courts.
     
 # Methodology
-
-## Most Different Systems Design
 
 The most different systems design evaluates whether states that are different in as many factors as possible have a similar dependent variable of interest because of a change in the dependent variable. For our analysis, the dependent variable is electricity pricing and the implementation of RPS policies at the state level. We wonder if changes in judicial rhetoric at the federal level impacts these two variables.
 
 However, our states are different in many ways. Thus, we must control for several variables to ensure that we are not overemphasizing the impact of judicial rhetoric on electricity prices and RPS policy. For example, variables such as political leanings, or whether the state votes democrat or republican, may be correlated with different odds of implementing RPS policies. Further, weather patterns, such as particularly hot summers, may make electricity more expensive because of increased demand. Finally, electricity market deregulation may impact electricity prices regardless of whether the state has engaged in RPS policies. These variables and their data sources are specified in the following table:
 
-### Variable Snapshot
+## Variable Snapshot
 
 ```{r copy1, echo = FALSE}
 variables.csv <- read.csv("Input/processed/variables.csv")
@@ -116,12 +116,8 @@ The text obtained from the FERC online commissioners was analyzed using a progra
 2.    All commonly used linking terms such as *and *, *or*, *but* are removed.
 3.    All terms are reduced to their root form. For example, all terms such as compliance, comply, and complying would become to be comply. This change enabled us to search only for the term comply without being concerned that we were missing particular conjugations of the word comply in our search.
 
-## Distilling Text
-
-
-
 ```{r copy2, echo = FALSE}
-rscript <- read.csv("R Scripts/pdf-clean.R")
+rscript <- import("Output/processed data/text-clean.json")
 rscript %>%
 filter (year>2005)%>%
 group_by(year)%>%
@@ -136,9 +132,9 @@ These electricity prices can also be broken down by month, where it is revealed 
 
 
 ```{r copy3, echo = FALSE}
-mergeddata.csv <- read.csv("Output/processed/mergeddata.cvs")
-prices=mergeddata.csv(
-time=factor(c("Year","Month")))
+mergeddata.csv <- import("Output/processed data/mergeddata.csv")
+prices=mergeddata.csv %>%
+  mutate(time=factor(c("Year","Month")))
 
 ggplot(data=prices, aes(x=time, y=Prices)) + stat_summary(fun.y="mean") +
  geom_line(colour="green") +
@@ -167,8 +163,8 @@ However, as illustrated above, the prices of electricity tend to shift with weat
 In contrast, order remains positively correlated with electricity prices (though it is just above the 0.00 coefficient). RPS policies are also correlated with increased electricity prices, but the impact is much less than the effects that have been noted in past studies.
 
 
-```{r copy4, echo = FALSE}
-final <- read.csv("Output/processed/mergeddata.cvs")
+```{r copy4, eval = FALSE}
+final <- import("Output/processed data/mergeddata.csv")
 ggplot(subset(final, Judicial %in% c("order.ave", "renewable.ave", "context_30")),
    	aes(x = judicial, y = price,  colour = interaction(Judicial, Prices))) + facet_wrap( ~ judicial) + stat_summary(fun.y="mean")
    	geom_point(alpha = 0.3, position = "jitter") +
@@ -185,6 +181,7 @@ The main finding of our analysis is that there is a pricing contradiction when e
 Finally, our main judicial link here was federal court rulings. In short, this variable was chosen in part to evaluate reverberation effects, but also because of the relative ease of scrapping the data from the FERC website (in comparison to from the websites of 50 state judicial commissions). What remains to be seen, however, is whether increased federal court focus on renewable energy is correlated with increased state-level court focus on renewable energy. Further studies would do well to evaluate the terminology used by courts at the state-level, in order to analyze if there is a reverberation of federal court rhetoric at the state level as well.
 
 \pagebreak
+\fancyhf{}
 
 # References
 
