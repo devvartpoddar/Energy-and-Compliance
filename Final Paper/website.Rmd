@@ -14,6 +14,8 @@ bibliography: Bibtex.bib
 csl: templates/apa.csl
 ---
 
+\pagebreak
+
 ```{r setup, include=FALSE}
 knitr::opts_knit$set(root.dir = "/home/devvart/Desktop/Energy-and-Compliance/")
 
@@ -28,9 +30,6 @@ load <- sapply(pkgs, function(x) {
   }
 )
 rm(load, pkgs)
-
-# # Settng working directory
-# try(setwd("/Users/154574/Documents/Energy-and-Compliance-master/Energy-and-Compliance-master"))
 ```
 
 # Introduction
@@ -41,11 +40,11 @@ Much of the blame for rising electricity prices has been levied against governme
 
 The question that is left unanswered here is why there is a divergence between states that have implemented renewable energy policies (knowing that it may lead to increased electricity cost) and those that have not. In part, this gap in the literature is because much research has been limited to the impact of state level policies on electricity prices, either through process-tracing extreme case studies [see @Netherlands2013] or by analyzing the relationship between cost and policy at the state level [see @Wang2016]. These research efforts are invaluable; they provide an understanding of how outliers have implemented renewable energy policies, and of general trends assuming monolithic political contexts. However, this paper will attempt to answer the question of what happens to renewable energy policy, and subsequently electricity costs, when political environments change.  To address this question, this paper will conduct a textual analysis of federal energy court rulings. Specifically, it will analyze whether changes in the environmental language used in the rulings of the federal energy courts is correlated with an increased electricity costs at the state level. The United States is the case study in this analysis because federal judicial rulings effects multiple different contexts. This "most different systems design" enables us to analyze whether changes in judicial opinion lead to changes in renewable energy policies and in electricity prices.
 
-# Literature Review
+# Literature Review: Two-Level Games, Renewable Energy Policies, and Electricity Prices
 
 ## Theoretical Framework: Two-Level Games
 
-The literature that concentrates solely on the link between state renewable energy policies and cost ignores any impact that federal body positions on renewable energy would have on state-level policy. This assumption follows the realist trajectory. Traditional realist scholars argue that there is no connection between judicial court rhetoric and state-level action because the rhetoric is epiphenomenal [@Mearsheimer1994] and governments enact renewable energy policies when it suits their best interests [@Downs1996]. Thus, the realist academic scholarship emphasizes that federal court-level rhetoric has no concrete impact on the renewable policies of states. Further, a realist would argue that if a state?s policies are in line with federal rulings, it is primarily due to the self-interest of the state [@Waltz1979]. As such, even in a situation where a state did adhere to the policies of a treaty, the fact that a state did so is not because of any relevant federal rhetoric.
+The literature that concentrates solely on the link between state renewable energy policies and cost ignores any impact that federal body positions on renewable energy would have on state-level policy. This assumption follows the realist trajectory. Traditional realist scholars argue that there is no connection between judicial court rhetoric and state-level action because the rhetoric is epiphenomenal [@Mearsheimer1994] and governments enact renewable energy policies when it suits their best interests [@Downs1996]. Thus, the realist academic scholarship emphasizes that federal court-level rhetoric has no concrete impact on the renewable policies of states. Further, a realist would argue that if a states policies are in line with federal rulings, it is primarily due to the self-interest of the state [@Waltz1979]. As such, even in a situation where a state did adhere to the policies of a treaty, the fact that a state did so is not because of any relevant federal rhetoric.
 
 On the other side of the ideological spectrum, constructivists argue that states do try to adhere to ideological rhetoric. Constructivists would argue that pressure from NGOs and politicians can alter the way that states approach renewable policy [@Finnemore1996]. Finally, a third perspective would argue that the reason why states implement renewable energy policy is because of local pressure and local support for specific policies. In this understanding, political institutions, interest groups, and state actors determine whether a government implements renewable energy policy [@Hafner2005]. Thus, whether states actually comply depends on a more localized mobilization.
 
@@ -53,11 +52,11 @@ Clearly these three mainstream arguments point in different directions. One main
 
 Due to the limitations of these perspectives, this paper will follow a theoretical framework that emphasizes the necessity of considering both federal and state-centered influences on a states domestic policies. This theoretical framework comes from Robert Putnam [@Putnam1988]s concept of a two-level game. Putnam argues that politicians consider both international and domestic dynamics in the formulation of international agreements. Putnams focus intentionally deviates from state-centric theories, which he argues are an uncertain foundation for theorizing how domestic and international politics interact [@Putnam1988 p.433]. He further theorizes a concept of reverberation. Putnam argues that *international pressures can reverberate within domestic politics* subsequently altering the position of domestic civic society groups [@Putnam1988 p.454]. Building on the significance of reverberation, Putnam argues that if the two spheres are linked synergistically then they cannot be modeled separately [@Putnam1988 p.456]. Thus, the incompleteness of the aforementioned theories is because they are attempting to model the influence of one sphere in absence of a discussion of the impact of the other sphere. We will use a modified version of this theory to model how the federal and state spheres interact in the United States. Putnams theory illustrates how the impact of federal court decisions can reverberate, and potentially influence, the attitudes of the state legislature
 
-## Energy Policy in the United States
+## The Formulation of Energy Policy in the United States
 
 There are two court systems that ensure that electricity companies comply with either the federal or government policies. The first court system is the Federal Energy Regulatory Commission (FERC). FERC is an independent regulatory agency within the United States Department of Energy. Specifically, FERC regulates the transmission of electricity in interstate commerce, and licenses non-federal hydropower projects. Their jurisdiction also includes overseeing the transmission and wholesale sales of electricity in interstate commerce, reviewing the siting applications for electric transmission projects, reviewing mergers and acquisitions by electricity companies, licenses and inspects private, municipal, and state hydroelectric projects, and overseeing environmental matters related to natural gas and hydroelectricity projects [@FERC2016]. In contrast, the state-level adjudicative bodies are responsible for the public utilities in the separate states. State-level bodies are primarily concerned with regulating retail electricity sales to customers, overseeing the construction of oil pipelines, and regulation of activities of the municipal power systems and most rural electric cooperatives [@FERC2016].
 
-These courts are guided by policies made at the state and federal level regarding electricity generation and distribution. Energy policy in the United States is formulated at both the federal and the state level. Federal level policies tend to be more financially based, and rely primarily on Tax Credits and Cost Recovery Systems. In contrast, state level policies can take a wide variety of forms including feed-in-tariffs, and renewable energy requirements [@FERC2016]. Hence, it is at the state level that there is significant divergence in policy as all states are subject to the overarching policies made at the federal level (and, in tandem, all rulings that are made by FERC).
+Energy policy in the United States is formulated at both the federal and the state level. Federal level policies tend to be more financially based, and rely primarily on Tax Credits and Cost Recovery Systems. In contrast, state level policies can take a wide variety of forms including feed-in-tariffs, and renewable energy requirements [@FERC2016]. Hence, it is at the state level that there is significant divergence in policy as all states are subject to the overarching policies made at the federal level (and, in tandem, all rulings that are made by FERC).
 
 ### Renewable Energy Policies, and Associated Costs
 
@@ -68,77 +67,90 @@ This paper will focus specifically on market-pull policies that incentivize the 
 
 ```{r copy, echo = FALSE}
 policies.csv <- read.csv("Input/processed/policies.csv")
-kable(policies.csv)
+kable(policies.csv, caption="Renewable Energy Policies")
 ```
 
 ### Energy Portfolio standards (quotas)
 
 In the United States, 29 states have implemented mandatory Renewable Portfolio Standards (RPS), and a further 8 states have adopted non-binding goals for renewable energy standards [@Wang2016]. These states place an obligation on electricity supply companies to produce a specific faction of their electricity from renewable sources. Though it has been argued that RPS policies increase the amount of renewable energy generation in a state [@Carley2009] critics argue that RPS increases retail electricity prices because of the required extra investment or costs involved with a switch to using renewable energy [@Lesser2013].
 
-Previous studies of RPS policy effects have focused on evaluating whether the implementation of policies leads to forecasted changes in electricity costs either at the national level or the state level [ see @PalmarBurtraw2005; @Kydes2007; @Wang2016]. Notably, Hongbo Wang (2016) uses a differences-in-differences model to compare the electricity prices of those states that have not implemented RPS to the electricity prices of those states that have implemented RPS, and found that implementation increases electricity prices when the RPS policy first becomes binding. Her argument is persuasive, both in terms of the evidence and methodology used. We want to expand on this argument by asking why particular states have chosen to implement renewable energy policies if they had the understanding that it may increase costs. We will link the implementation of renewable energy policy to the reverberation effects of particular voting patterns, and to the rhetoric used by federal energy courts.
+Previous studies of RPS policy effects have focused on evaluating whether the implementation of policies leads to forecasted changes in electricity costs either at the national level or the state level [see @PalmarBurtraw2005; @Kydes2007; @Wang2016]. Notably, Hongbo Wang (2016) uses a differences-in-differences model to compare the electricity prices of those states that have not implemented RPS to the electricity prices of those states that have implemented RPS, and found that implementation increases electricity prices when the RPS policy first becomes binding. Her argument is persuasive, both in terms of the evidence and methodology used. We want to expand on this argument by asking why particular states have chosen to implement renewable energy policies if they had the understanding that it may increase costs. We will link the implementation of renewable energy policy to the reverberation effects of particular voting patterns, and to the rhetoric used by federal energy courts.
 
 ### Feed-in Tariffs, Tendering systems and Green Tariffs
 
 Despite the wide international use of FITS, the utilization of feed-in tariffs have not been popular in the United States at the state level. Currently, there are five states that have mandated FITs by law or regulation, and a handful of states have voluntary FIT programs [@EIA2013]. Given the lack of variation at the state level for this policy in the United States, this policy will not be the main policy of investigation.
 
-In the United States, the use of tendering systems for long-term contracts and green tariffs are not an independent policy measure in and of themselves. Rather, companies can choose to engage in long-term contracts or green tariffs in order to ensure that they meet the requirements set out by other policies [@Hong2015].
+In the United States, the use of tendering systems for long-term contracts and green tariffs are not an independent policy measure in and of themselves. Rather, companies can choose to engage in long-term contracts or green tariffs in order to ensure that they meet the requirements set out by other policies [@Wang2016].
     
 # Methodology
 
-The most different systems design evaluates whether states that are different in as many factors as possible have a similar dependent variable of interest because of a change in the dependent variable. For our analysis, the dependent variable is electricity pricing and the implementation of RPS policies at the state level. We wonder if changes in judicial rhetoric at the federal level impacts these two variables.
+## Overview
 
-However, our states are different in many ways. Thus, we must control for several variables to ensure that we are not overemphasizing the impact of judicial rhetoric on electricity prices and RPS policy. For example, variables such as political leanings, or whether the state votes democrat or republican, may be correlated with different odds of implementing RPS policies. Further, weather patterns, such as particularly hot summers, may make electricity more expensive because of increased demand. Finally, electricity market deregulation may impact electricity prices regardless of whether the state has engaged in RPS policies. These variables and their data sources are specified in the following table:
+We use a most different systems design (MDSD) to evaluate changes in prices at the state level. A MDSD evaluates when and why different systems have the same outcome [@Levy2008]. For our analysis, the dependent variables are electricity pricing and the implementation of RPS policies at the state level. We wonder if changes in judicial rhetoric at the federal level impacts these two variables in the same way in different contexts. Theoretically, if increased prices are linked to a greater emphasis on renewable policies, then we should see increased electricity prices and increased implementation of RPS policies in the different states if the judicial rhetoric changes.
 
-## Variable Snapshot
+## Operationalizing Reverberation
 
-```{r copy1, echo = FALSE}
-variables.csv <- read.csv("Input/processed/variables.csv")
-kable(variables.csv)
-```
-                      	 
-This paper relies on the assumption that reverberation of FERC decisions results from three intertwined variables. The first is frequency. We argue that the more frequently FERC uses particular terms, the more likely the court decisions are to reverberate in the state context. This is because the more a federal court makes statements about a topic, the more likely this topic will arguably stay in the mind of a state politician or state advocates. Repetition, here, is key for getting into the long-term memory of particular individuals.
+This paper relies on the assumption that federal energy court decisions reverberate in state energy policy. We define energy policy reverberation as the impact of three intertwined variables. The first is frequency. We argue that the more frequently FERC uses particular terms, the more likely the court decisions are to reverberate in the state context. This is because the more a federal court makes statements about a topic, the more likely this topic will arguably stay in the mind of a state politician or state advocates. Repetition, here, is key for getting into the long-term memory of particular individuals.
 
-The second variable is that of renewable terminology. We argue that the court can choose to use particular words in order to make a ruling. The choice of some terms are more likely to encourage a positive association with the use of renewable energy policies. Hence, the terms that will be searched for as representative of renewable terminology are green, renewable, hydro, sustainable, sustain, and environment. These terms carry positive connotations with regards to renewable energy.
+The second variable is that of renewable terminology. We argue that the court can choose to use particular words in order to make a ruling. The choice of some terms is more likely to encourage a positive association with the use of renewable energy policies. Hence, the terms that will be searched for as representative of renewable terminology are green, renewable, hydro, sustainable, sustain, and environment. These terms carry positive connotations with regards to renewable energy.
+
 The third variable is that of action terminology. Here, words that indicate that the court is ordering a particular corporation or person to take action are correlated with situations where the individual does not have a choice as to whether they will adhere to the ruling. The action terms that will be searched for are order, revoke, and comply.
 
-## Web-Scrapping
-
-Each of the relevant variables was obtained using web scrapping. The variables were then matched based on year, month, and state in question. For variables that did not change over the course of a year, or between years, such as the proportion of the popular vote that went to each party in the relevant elections, the same numbers were applied to all observations until they changed. Hence, the votes for political parties from 2000 were counted as the same for all months in 2000, 2001, 2002, and 2003. Those from 2004 were counted for all months in 2004, 2005, 2006, and 2007, and so on.
+These three terms will be used to analyze whether changes in judicial terminology impact electricity pricing and RPS implementation.
 
 ## Textual Analysis
 
-The text obtained from the FERC online commissioners was analyzed using a program called lemmatize. Lemmatize works through cleaning the text in three distinct ways.
-1.    All punctuation and numbers are removed.
-2.    All commonly used linking terms such as *and *, *or*, *but* are removed.
-3.    All terms are reduced to their root form. For example, all terms such as compliance, comply, and complying would become to be comply. This change enabled us to search only for the term comply without being concerned that we were missing particular conjugations of the word comply in our search.
+The judicial terminology was obtained from the FERC online commissioners, with the PDF files being scraped from their website. The frequency of the orders is highlighted in Chart 1 below. Notably, there has been an increased proportion of decisions made by FERC since 2005, with a dramatic peak in 2015. Not all of these decisions will relate to renewable energy policy, but the increased use of the court to rule on legal disputes indicates that it may be perceived to have greater legitimacy in ruling on the cases. This increased legitimacy would theoretically lead to a greater likelihood of its policies reverberating in state contexts. 
+
 
 ```{r copy2, echo = FALSE}
 rscript <- import("Output/processed data/text-clean.json")
 plot <- rscript %>%
-filter(year>2005) %>%
+filter (year>2005)%>%
 group_by(year)%>%
 dplyr::summarise(freq=n())%>%
 ggplot()+
-geom_bar(aes(x=as.factor(year), y=freq), stat="identity", colour="green") +
-xlab("year") + ylab("Frequency of Judicial Decisions")+
-ggtitle("Frequency of Judicial Decisions by Year")
+geom_bar(aes(x=as.factor(year), y=freq), stat="identity") +
+xlab("Year") + ylab("Frequency of Judicial Decisions")+
+labs(caption="Frequency of Judicial Decisions by Year") +
+  theme_bw()
 
 ggplotly(plot)
 ```
 
-These electricity prices can also be broken down by month, where it is revealed that they tend to be lowest in the summer, and highest in the summer.
+We cleaned the pdf text to get to a measure of legitamcy / compliance. The first stage of the analysis involved the use of **Treetagger**, a tool developed by @schmid1994treetagger for annotating text with part-of-speech tags. **Treetagger** can annotate over 13 languages, and provides us with the *lemma*, the root form of a word. Lemmatisation is a powerful method of reducing the complexity of text, particularly in form of the different tenses, without changing the meaning of the text. The lemmatisation is further restricted on adjectives and adverbs, i.e. any word that qualifies / describes the context of the article is not modified.
 
 
-<!-- #```{r copy3, echo = FALSE} -->
-<!-- mergeddata.csv <- import("Output/processed data/mergeddata.csv") -->
-<!-- prices <- mergeddata.csv %>% -->
-<!--   mutate(time=factor(c("Year","Month"))) -->
+## Web-Scrapping
 
-<!-- ggplot(data=prices, aes(x=time, y=Prices)) + stat_summary(fun.y="mean") + -->
-<!--  geom_line(colour="green") + -->
-<!-- xlab("Month and Year") + ylab("Electricity Prices") + -->
-<!-- ggtitle ("Electricity Prices by Month") -->
-<!-- #``` -->
+We controlled for several variables to ensure that we are not overemphasizing the impact of judicial rhetoric on electricity prices and RPS policy. Each of the relevant variables was obtained using web scrapping (see Appendix 1). The variables were then matched based on year, month, and state in question. For variables that did not change over the course of a year, or between years, such as the proportion of the popular vote that went to each party in the relevant elections, the same numbers were applied to all observations until they changed. Hence, the votes for political parties from 2000 were counted as the same for all months in 2000, 2001, 2002, and 2003. Those from 2004 were counted for all months in 2004, 2005, 2006, and 2007, and so on.
+
+Specifically, we obtained data on a variety of variables that could impact electricity pricing. For example, variables such as political leanings, or whether the state votes democrat or republican, may be correlated with different odds of implementing RPS policies. Further, weather patterns, such as particularly hot summers, may make electricity more expensive because of increased demand. Finally, electricity market deregulation may impact electricity prices regardless of whether the state has engaged in RPS policies. These variables are specified in the following table:
+
+```{r copy1, echo = FALSE}
+variables.csv <- read.csv("Input/processed/variables.csv")
+kable(variables.csv, caption="Variable Overview")
+```
+ 
+There are a few things to take note of in this table. First, there is a wide variance of electricity prices, ranging from 5 cents per kilowatt-hour (kWh) to 23 cents per kWh. However, the majority of pricing is at around the 10-11 cent mark. Second, there are fewer states with RPS policies than without RPS policies (as indicated by the 0.43 mean), and fewer deregulated states (mean of 0.33). Finally, the order variable has the most variance of the terminology variables (can be anywhere from 2.51 percent of the text to 0.11 percent of the text). It is also more likely to be used in judicial decisions. In contrast, context and renewable have less variance and are used with less frequency. This makes sense because courts are likely to use order terms in cases that do not refer to renewable energy, whereas renewable terminology would be unlikely to come up unless the case were to specifically address renewable policy.
+
+## Dependent Variable: Electricity Pricing
+                   	 
+The key variable for the purposes of our analysis is that of electricity prices. When the electricity prices are broken down by month, the trend is for prices to be lowest in the winter, and highest in the summer. This is important for our final model because it reveals that changes in electricity pricing may differ as a result of month-by-month usage changes, and not because of other factors. We will control for this in our final regression.
+
+
+```{r copy3, echo = FALSE}
+prices.data <- import("./Output/processed data/mergeddata.csv") %>%
+  mutate(time = ymd(paste0(year, "-", month, "-01"))) %>%
+  group_by(time) %>%
+  dplyr::summarise(mean = mean(Prices))
+p <- ggplot(prices.data, aes(time, mean)) + 
+geom_point(alpha = 0.7) + 
+geom_line(aes(group = 1)) + 
+labs(y = "Electricity Prices", caption = "Electricity Prices by Year") + scale_x_date(date_breaks = "1 year", date_labels = "%Y") + scale_y_continuous(breaks = 7:13) + 
+theme_bw() + theme( axis.title.x = element_blank(), legend.position = "none" )
+ggplotly(p)
+```
 
 
 ## Terminology Regression
@@ -152,31 +164,185 @@ However, these analyses do not account for whether there is a connection between
 # Results
 
 ## Terminology Regression
-The following chart presents the results of our analyses for the impact of order, renewables and context terminology on electricity pricing. It also includes the impact of RPS policies on electricity prices. It should be noted that for each regression, we have controlled for the other noted variables, as well as political affiliation, deregulation, and weather.
+Chart 3 presents the results of our analyses for the impact of order, renewables and context terminology on electricity pricing. It also includes the impact of RPS policies on electricity prices. It should be noted that for each regression, we have controlled for the other noted variables, as well as political affiliation, deregulation, and weather.
 
 The first regression, the bars on the left hand side, contain the results for the base fixed effects regression. It should be noted that there is a positive effect for all the variables. This implies that the increased frequency (terminology) or enactment of RPS policies is correlated with an increased price of electricity, when unobserved heterogeneity is controlled for. These results, and in particular the result that RPS policy is correlated with higher electricity prices, is expected based on the theoretical framework and literature review.
 
-However, as illustrated above, the prices of electricity tend to shift with weather patterns that occur within a year. Hence, we include a second regression that regresses based on month and year fixed effects. Curiously, this regression has notable effects on the impacts of the terminology and RPS variables. Specifically, both context and renewable variables drop to a negative effect. The frequency of these variables is now correlated with a decrease in the price of electricity. This means that as the word renewable or the appearance of both order and renewable words within 30 words of each other increases in frequency, the correlated cost of electricity goes down. This result was not predicted by our models, and is suggests that there must be some unspecified bridging variables between the implementation of renewable energy policies and increased electricity costs. These bridging variables could include companies buying into long-term contracts that lock-them in to more expensive renewable energy production. However, this is  subject for future research.
+However, as illustrated above, the prices of electricity tend to shift with weather patterns that occur within a year. Hence, we include a second regression that regresses based on month and year fixed effects. 
 
-In contrast, order remains positively correlated with electricity prices (though it is just above the 0.00 coefficient). RPS policies are also correlated with increased electricity prices, but the impact is much less than the effects that have been noted in past studies.
+```{r regtable, echo = FALSE, message=FALSE, warning=FALSE, cache=3}
+
+reg.coef <- function() {
+   # Importing Data
+  reg.data <- import("Output/processed data/mergeddata.csv") %>%
+  mutate(time = ymd(paste0(year, "-", month, "-01")),
+    log.prices = log(Prices),
+    order.ave = 100 * order.ave,
+    renewable.ave = 100 * renewable.ave,
+    context_30 = context_30 * 100) %>%
+    arrange(State, year, month) %>%
+    group_by(State) %>%
+    mutate(lag.log.prices = lag(log.prices),
+      lag.prices = lag(Prices)) %>%
+    ungroup()
+
+    months <- unique(reg.data$month)
+
+    # Generating monthly dummy variables
+    for (x in months) {
+        if (x == 1) {next}
+        colname <- paste0("dmonth_", x)
+        reg.data[[colname]] <-  ifelse(reg.data$month == x, 1, 0)
+    }
+
+    # Creating function to extract coefs
+  coef.extract <- function(var.names, model, data = reg.data) {
+      formula.call <- as.formula(paste("log.prices ~", var.names))
+
+      fe.reg <- plm(formula.call, data = data,
+        index = c("State", "time"), model = "within") %>%
+        summary()
+
+    coef.table <- fe.reg[["coefficients"]] %>%
+      as.data.frame() %>%
+      mutate(variable = rownames(.),
+             model = model) %>%
+      filter(grepl("RPS|order.ave|context_30|renewable.ave", variable)) %>%
+      select(model, variable, everything())
+
+    coef.table <- coef.table[, 1:4]
+    colnames(coef.table)[3:4] <- c("coef", "se")
+
+      return(coef.table)
+  }
+
+  # Creating function to run models seperately
+  model.fun <- function(variable = "order.ave") {
+      # Running Base fe
+  col.names <- colnames(reg.data)
+  var.names <- paste(c(variable, "party", "temperature"), collapse = " + ")
+
+  base <- coef.extract(var.names, "Base FE")
+
+  # Running Fe with Dummies for months
+  var.names <- paste(c(variable, "party", "temperature",
+                       grep("dmonth", col.names, value = T), "year"), collapse = " + ")
+
+  month.fe <- coef.extract(var.names, "Month FEs")
+
+  # Running FE with median corrected context and order
+
+  reg.data$renewable.ave[is.na(reg.data$renewable.ave)] <- median(reg.data$renewable.ave, na.rm = T)
+  reg.data$order.ave[is.na(reg.data$order.ave)] <- median(reg.data$order.ave, na.rm = T)
+  reg.data$context_30[is.na(reg.data$context_30)] <- median(reg.data$context_30, na.rm = T)
+
+  median.fe <- coef.extract(var.names, "Median FEs")
+
+    final.table <- rbind(base, month.fe, median.fe)
+
+    return(final.table)
+  }
+
+  order.model <- model.fun()
+  renewable.model <- model.fun("renewable.ave")
+  RPS.model <- model.fun("RPS")
+  final.model <- model.fun("context_30") %>% rbind(order.model, renewable.model, RPS.model)
+
+  return(final.model)
+
+}
+
+reg.table <- reg.coef()
+
+# Generating maximum and minimum
+reg.table %<>%
+  mutate(
+    ci95_max = coef + se * 1.96,
+    ci95_min = coef - se * 1.96,
+    ci80_max = coef + se * 1.28,
+    ci80_min = coef - se * 1.28
+  ) %>%
+  filter(!grepl("Median FEs", model)) %>%
+  transform(model = as.factor(model))
 
 
-```{r copy4, eval = FALSE}
-final <- import("Output/processed data/mergeddata.csv")
-ggplot(subset(final, Judicial %in% c("order.ave", "renewable.ave", "context_30")),
-   	aes(x = judicial, y = price,  colour = interaction(Judicial, Prices))) + facet_wrap( ~ judicial) + stat_summary(fun.y="mean")
-   	geom_point(alpha = 0.3, position = "jitter") +
-   	geom_boxplot(alpha = 0, colour = "black")+
-ggtitle ("Judicial Rulings and Price")
 ```
 
+``` {r copy5, echo = FALSE, message = FALSE, warning = FALSE} 
+plot <- ggplot(reg.table, aes(model, coef)) + 
+geom_point() + 
+geom_errorbar(aes(ymin = ci95_min, ymax=ci95_max), colour = "#002A42") + 
+geom_errorbar(aes(ymin = ci80_min, ymax=ci80_max), colour = "#778899") + 
+geom_hline(aes(yintercept = 0), colour = "red", linetype = 2) + 
+facet_wrap(~variable, scales = "fixed") + 
+labs(y = "Coefficients", x = "Models", caption="Impact of Judicial Terminology on Energy Prices") + theme_bw() + theme( legend.position = "none" ) 
+ggplotly(plot)
+```
+
+Curiously, the inclusion of the month fixed effects regression has a substantial impact on the correlation between the terminology and RPS variables, and electricity prices. Specifically, both context and renewable variables drop to a negative effect. The frequency of these variables is now correlated with a decrease in the price of electricity. This means that as the appearance of both order and renewable words within 30 words of each other increases by 1 percent, the correlated cost of electricity goes down by 0.18 percent. If there is a 1 percent increase in the number of times renewables are referenced (even without being linked to an order term), this is correlated with a 0.15 percent decrease in electricity prices. Our theoretical framework did not predict these results, and these results suggest that there must be some unspecified bridging variables between the implementation of renewable energy policies and increased electricity costs. These bridging variables could include companies buying into long-term contracts that lock them in to more expensive renewable energy production. However, this is subject for future research.
+
+In contrast, order remains positively correlated with electricity prices in both of the models (though with the month fixed effects model, the coefficient is just above 0.00). RPS policies are also correlated with increased electricity prices in both models. However, in our base fixed effects model having an RPS policy is correlated with a 0.26 percent increase in electricity prices, whereas in the month-to-month model it is only correlated with a 0.04 percent increase in electricity prices.
+
 ## Two Step
+
+We re-run our results using a two-stage least squares regression displayed in the table below. RPS still has a staticially significant and positive increase in renewable electricity prices. The effect however remains constant, with RPS increasing prices by 0.04%. 
+
+```{r twostep, echo=FALSE, message=FALSE, warning=FALSE, cache=3}
+
+reg.data <- import("Output/processed data/mergeddata.csv") %>%
+  mutate(time = ymd(paste0(year, "-", month, "-01")),
+    log.prices = log(Prices),
+    order.ave = 100 * order.ave,
+    renewable.ave = 100 * renewable.ave,
+    context_30 = context_30 * 100) %>%
+    arrange(State, year, month) %>%
+    group_by(State) %>%
+    mutate(lag.log.prices = lag(log.prices),
+      lag.prices = lag(Prices)) %>%
+    ungroup()
+
+months <- unique(reg.data$month)
+
+    # Generating monthly dummy variables
+for (x in months) {
+    if (x == 1) {next}
+    colname <- paste0("dmonth_", x)
+    reg.data[[colname]] <-  ifelse(reg.data$month == x, 1, 0)
+}
+
+col.names <- colnames(reg.data)
+
+
+# Running Fe with Dummies for months
+var.names <- paste(c("temperature", grep("dmonth", col.names, value = T), "year",
+                   "RPS | . - context_30", "party"), collapse = " + ")
+
+formula.call <- as.formula(paste("log.prices ~", var.names))
+
+twols <- plm(formula.call, data = reg.data, index = c("State", "time"), model = "within")
+```
+
+``` {r star, echo = FALSE, results = "asis"}
+stargazer::stargazer(twols, type = "html",
+  title = "Two Stage Least Square Regressions",
+  header = FALSE,
+  omit = c("dmonth|year")
+  )
+```
+
+\pagebreak
 
 # Conclusion and Avenues for Further Research
 
 The main finding of our analysis is that there is a pricing contradiction when evaluating state policies and federal rulings. This finding runs against the arguments in the mainstream literature that suggest that RPS policies increase electricity prices because the generation of electricity is more expensive if done through renewable forms. However, if federal rulings that contain terminology around ordering companies take specific action with regards to renewable energy are correlated with reduced electricity prices, it may not all be about the costs of electricity generation. Hence, further research would do well to expand on this contradiction by utilizing process-tracing analysis of the link between RPS and increased electricity costs in select states. Specifically, what about RPS is driving prices upwards? If it is not the cost of generating electricity, what is the economic impact of implementing RPS?
 
 Finally, our main judicial link here was federal court rulings. In short, this variable was chosen in part to evaluate reverberation effects, but also because of the relative ease of scrapping the data from the FERC website (in comparison to from the websites of 50 state judicial commissions). What remains to be seen, however, is whether increased federal court focus on renewable energy is correlated with increased state-level court focus on renewable energy. Further studies would do well to evaluate the terminology used by courts at the state-level, in order to analyze if there is a reverberation of federal court rhetoric at the state level as well.
+
+# Appendix: Web-Scrapped Variables
+```{r copy6, echo = FALSE}
+webscr.csv <- read.csv("Input/processed/webscr.csv")
+kable(webscr.csv, caption="Web Scrapped Variables")
+```
 
 # References
 
