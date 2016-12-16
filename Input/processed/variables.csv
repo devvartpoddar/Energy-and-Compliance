@@ -1,4 +1,4 @@
-,Prices,RPS,Deregulation,Freq. of Order,Freq. of Renewable,Context; Renewable,Temperature
+,Prices,RPS,Dereg.,Order,Renewable,Context,Temp.
 Mean,10.73,0.43,0.33,1.52,0.15,0.11,91.97
 Median,10.16,0,0,1.41,0.08,0.08,89.5
 Min,4.95,0,0,0.11,0.01,0,2
