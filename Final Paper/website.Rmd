@@ -3,27 +3,23 @@ title: "Policy Reverberation and Electricity Prices in the United States"
 author: "Emma Heffernan & Devvart Poddar"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 output:
-  pdf_document:
-    citation_package: natbib
+  html_document:
     highlight: tango
-    keep_tex: yes
     number_sections: yes
     toc: yes
-    includes:
-      in_header: templates/header.tex
+    toc_float: true
+    theme: flatly
+    df_print: kable
 bibliography: Bibtex.bib
-classoption: twoside
 csl: templates/apa.csl
 ---
-
-\pagebreak
 
 ```{r setup, include=FALSE}
 knitr::opts_knit$set(root.dir = "/home/devvart/Desktop/Energy-and-Compliance/")
 
 rm(list = ls())
 pkgs <- c("dplyr", "magrittr", "methods", "rvest", "stringi", "rio", "ggplot2",
-  "tm", "wordcloud", "viridis", "pdftools", "xml2", "EIAdata", "lubridate", "stargazer", "knitr", "gdata", "plm")
+  "tm", "wordcloud", "viridis", "pdftools", "xml2", "EIAdata", "lubridate", "stargazer", "knitr", "gdata", "plm", "plotly")
 
 load <- sapply(pkgs, function(x) {
 	suppressPackageStartupMessages(
@@ -45,7 +41,7 @@ Much of the blame for rising electricity prices has been levied against governme
 
 The question that is left unanswered here is why there is a divergence between states that have implemented renewable energy policies (knowing that it may lead to increased electricity cost) and those that have not. In part, this gap in the literature is because much research has been limited to the impact of state level policies on electricity prices, either through process-tracing extreme case studies [see @Netherlands2013] or by analyzing the relationship between cost and policy at the state level [see @Wang2016]. These research efforts are invaluable; they provide an understanding of how outliers have implemented renewable energy policies, and of general trends assuming monolithic political contexts. However, this paper will attempt to answer the question of what happens to renewable energy policy, and subsequently electricity costs, when political environments change.  To address this question, this paper will conduct a textual analysis of federal energy court rulings. Specifically, it will analyze whether changes in the environmental language used in the rulings of the federal energy courts is correlated with an increased electricity costs at the state level. The United States is the case study in this analysis because federal judicial rulings effects multiple different contexts. This "most different systems design" enables us to analyze whether changes in judicial opinion lead to changes in renewable energy policies and in electricity prices.
 
-# Literature Review: Two-Level Games, Renewable Energy Policies, and Electricity Prices
+# Literature Review
 
 ## Theoretical Framework: Two-Level Games
 
@@ -57,7 +53,7 @@ Clearly these three mainstream arguments point in different directions. One main
 
 Due to the limitations of these perspectives, this paper will follow a theoretical framework that emphasizes the necessity of considering both federal and state-centered influences on a states domestic policies. This theoretical framework comes from Robert Putnam [@Putnam1988]s concept of a two-level game. Putnam argues that politicians consider both international and domestic dynamics in the formulation of international agreements. Putnams focus intentionally deviates from state-centric theories, which he argues are an uncertain foundation for theorizing how domestic and international politics interact [@Putnam1988 p.433]. He further theorizes a concept of reverberation. Putnam argues that *international pressures can reverberate within domestic politics* subsequently altering the position of domestic civic society groups [@Putnam1988 p.454]. Building on the significance of reverberation, Putnam argues that if the two spheres are linked synergistically then they cannot be modeled separately [@Putnam1988 p.456]. Thus, the incompleteness of the aforementioned theories is because they are attempting to model the influence of one sphere in absence of a discussion of the impact of the other sphere. We will use a modified version of this theory to model how the federal and state spheres interact in the United States. Putnams theory illustrates how the impact of federal court decisions can reverberate, and potentially influence, the attitudes of the state legislature
 
-## The Formulation of Energy Policy in the United States
+## Energy Policy in the United States
 
 There are two court systems that ensure that electricity companies comply with either the federal or government policies. The first court system is the Federal Energy Regulatory Commission (FERC). FERC is an independent regulatory agency within the United States Department of Energy. Specifically, FERC regulates the transmission of electricity in interstate commerce, and licenses non-federal hydropower projects. Their jurisdiction also includes overseeing the transmission and wholesale sales of electricity in interstate commerce, reviewing the siting applications for electric transmission projects, reviewing mergers and acquisitions by electricity companies, licenses and inspects private, municipal, and state hydroelectric projects, and overseeing environmental matters related to natural gas and hydroelectricity projects [@FERC2016]. In contrast, the state-level adjudicative bodies are responsible for the public utilities in the separate states. State-level bodies are primarily concerned with regulating retail electricity sales to customers, overseeing the construction of oil pipelines, and regulation of activities of the municipal power systems and most rural electric cooperatives [@FERC2016].
 
@@ -118,29 +114,31 @@ The text obtained from the FERC online commissioners was analyzed using a progra
 
 ```{r copy2, echo = FALSE}
 rscript <- import("Output/processed data/text-clean.json")
-rscript %>%
-filter (year>2005)%>%
+plot <- rscript %>%
+filter(year>2005) %>%
 group_by(year)%>%
 dplyr::summarise(freq=n())%>%
 ggplot()+
 geom_bar(aes(x=as.factor(year), y=freq), stat="identity", colour="green") +
 xlab("year") + ylab("Frequency of Judicial Decisions")+
-ggtitle ("Frequency of Judicial Decisions by Year")
+ggtitle("Frequency of Judicial Decisions by Year")
+
+ggplotly(plot)
 ```
 
 These electricity prices can also be broken down by month, where it is revealed that they tend to be lowest in the summer, and highest in the summer.
 
 
-```{r copy3, echo = FALSE}
-mergeddata.csv <- import("Output/processed data/mergeddata.csv")
-prices=mergeddata.csv %>%
-  mutate(time=factor(c("Year","Month")))
+<!-- #```{r copy3, echo = FALSE} -->
+<!-- mergeddata.csv <- import("Output/processed data/mergeddata.csv") -->
+<!-- prices <- mergeddata.csv %>% -->
+<!--   mutate(time=factor(c("Year","Month"))) -->
 
-ggplot(data=prices, aes(x=time, y=Prices)) + stat_summary(fun.y="mean") +
- geom_line(colour="green") +
-xlab("Month and Year") + ylab("Electricity Prices") +
-ggtitle ("Electricity Prices by Month")
-```
+<!-- ggplot(data=prices, aes(x=time, y=Prices)) + stat_summary(fun.y="mean") + -->
+<!--  geom_line(colour="green") + -->
+<!-- xlab("Month and Year") + ylab("Electricity Prices") + -->
+<!-- ggtitle ("Electricity Prices by Month") -->
+<!-- #``` -->
 
 
 ## Terminology Regression
@@ -179,9 +177,6 @@ ggtitle ("Judicial Rulings and Price")
 The main finding of our analysis is that there is a pricing contradiction when evaluating state policies and federal rulings. This finding runs against the arguments in the mainstream literature that suggest that RPS policies increase electricity prices because the generation of electricity is more expensive if done through renewable forms. However, if federal rulings that contain terminology around ordering companies take specific action with regards to renewable energy are correlated with reduced electricity prices, it may not all be about the costs of electricity generation. Hence, further research would do well to expand on this contradiction by utilizing process-tracing analysis of the link between RPS and increased electricity costs in select states. Specifically, what about RPS is driving prices upwards? If it is not the cost of generating electricity, what is the economic impact of implementing RPS?
 
 Finally, our main judicial link here was federal court rulings. In short, this variable was chosen in part to evaluate reverberation effects, but also because of the relative ease of scrapping the data from the FERC website (in comparison to from the websites of 50 state judicial commissions). What remains to be seen, however, is whether increased federal court focus on renewable energy is correlated with increased state-level court focus on renewable energy. Further studies would do well to evaluate the terminology used by courts at the state-level, in order to analyze if there is a reverberation of federal court rhetoric at the state level as well.
-
-\pagebreak
-\fancyhf{}
 
 # References
 
