@@ -9,6 +9,15 @@ Rising electricity costs in developed nations has become the political topic du 
 
 We question whether *different degrees of judicial compliance with political regulations leads to different cost outcomes*. Our project will deal with measuring complicance through American commissioner court decisions to identify impact on residential electricty pricing.
 
+## Final Presentation
+
+Want to see our work? Follow the links below;
+- [Presentation](https://github.com/devvartpoddar/Energy-and-Compliance)
+- [Website](https://cdn.rawgit.com/devvartpoddar/Energy-and-Compliance/master/Final%20Paper/website.html)
+- [Final Paper](https://github.com/devvartpoddar/Energy-and-Compliance/raw/master/Final%20Paper/PDF.pdf)
+
+The raw files for the website and the Final Paper will be available [here](https://github.com/devvartpoddar/Energy-and-Compliance/tree/master/Final%20Paper).
+
 ### Assignment 3 Files
 **Note:** The Rmd file as well as the pdf for assignment 3 is located in the folder "Data and Methodolgy".
 
